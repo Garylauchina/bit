@@ -16,28 +16,31 @@ send_url = '/message/custom/send?access_token=%s'
 access_token = requests.get(base_url + token_url).json()['access_token']
 print(access_token)
 
+
 # 获取用户ID
-id_list = requests.get(base_url + get_id_url % access_token)
-print('总共%s名用户' % id_list.json()['total'])
-print(id_list.json())
-id_list = id_list.json()['data']['openid']
-for n in range(len(id_list)):
-    id_info = requests.get(base_url + id_info_url % (access_token, id_list[n]))
-    print(id_info.json())
+def all_user():
+    a = requests.get(base_url + get_id_url % access_token)
+    print('总共%s名用户' % a.json()['total'])
+    print(a.json())
+    a = a.json()['data']['openid']
+    for n in range(len(a)):
+        id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
+        print(id_info.json())
+    return a
 
 
 # 定义一个函数"send_msg"，用来向公众号用户群发一条消息
-def send_msg(get_message):
+def send_msg(get_message, get_user):
     content = {
         'content': get_message
     }
     msg_pkg = {}
-    for n in range(len(id_list)):
-        msg_pkg['touser'] = id_list[n]
+    for n in range(len(get_user)):
+        msg_pkg['touser'] = get_user[n]
         msg_pkg['msgtype'] = 'text'
         msg_pkg['text'] = content
         r = requests.post(base_url + send_url % access_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-        id_info = requests.get(base_url + id_info_url % (access_token, id_list[n]))
+        id_info = requests.get(base_url + id_info_url % (access_token, get_user[n]))
         if r.json()['errcode'] != 0:
             print('第%s个用户%s发送失败' % ((n + 1), id_info.json()['remark']))
             print(r.json()['errmsg'])
@@ -100,9 +103,33 @@ def get_bitlist():
     return bitlist
 
 
-#bitlist = get_bitlist()
+# 获取素材库中的一个素材id
+def image_id():
+    getimg_url = '/material/batchget_material?access_token=%s'
+    files = {"type": "image", "offset": 0, "count": 1}
+    r = requests.post(base_url + getimg_url % access_token, json.dumps(files, ensure_ascii=False).encode("utf-8"))
+    return r
+
+
+# 将获取的信息打包到一个草稿中
+def pack_info(get_info, get_img):
+    pack_url = '/draft/add?access_token=%s'
+    title = time.strftime('%Y-%m-%d', time.localtime()) + '招标列表'
+    data = {
+        "title": title,
+        "content": get_info,
+        "thumb_media_id": get_img
+    }
+    print(data)
+    r = requests.post(base_url + pack_url % access_token, data=json.dumps(data,ensure_ascii=False).encode('utf-8'))
+    return r
+
+
+ss = pack_info('\n还是测试\n测试了一遍又一遍\n快点给个好评', image_id().json()['item'][0]['media_id'])
+print(ss.json())
+# print(image_id().json())
+# bitlist = get_bitlist()
 # print(bitlist)
+# send_msg(bitlist,all_user())
 # print('近三日共有%s条招标信息' % len(bitlist))
-#for i in bitlist:
-#    send_msg(i)
-#send_msg('近三日共有%s条招标信息' % len(bitlist))
+# send_msg('近三日共有%s条招标信息' % len(bitlist))

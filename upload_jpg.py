@@ -10,8 +10,8 @@ upload_url = '/material/add_material?access_token=%s&type=image'
 access_token = requests.get(base_url + token_url).json()['access_token']
 print(access_token)
 
-with open('test.jpg','rb') as fp:
-    files = {'type':'image','media': fp}
+with open('test.jpg', 'rb') as fp:
+    files = {'type': 'image', 'media': fp}
     print(files)
     r = requests.post(base_url + upload_url % access_token, files=files)
     print(r.json())
