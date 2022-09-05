@@ -116,16 +116,23 @@ def pack_info(get_info, get_img):
     pack_url = '/draft/add?access_token=%s'
     title = time.strftime('%Y-%m-%d', time.localtime()) + '招标列表'
     data = {
-        "title": title,
-        "content": get_info,
-        "thumb_media_id": get_img
+        "articles": [{
+            "title": title,
+            "author": "tyzh",
+            "content": get_info,
+            "content_source_url": "",
+            "need_open_comment": 0,
+            "only_fans_can_comment": 0,
+            "digest": "",
+            "thumb_media_id": get_img
+        }]
     }
-    print(data)
-    r = requests.post(base_url + pack_url % access_token, data=json.dumps(data,ensure_ascii=False).encode('utf-8'))
+    post_data = json.dumps(data,ensure_ascii=False).encode('utf-8')
+    r = requests.post(base_url + pack_url % access_token, data=post_data)
     return r
 
-
-ss = pack_info('\n还是测试\n测试了一遍又一遍\n快点给个好评', image_id().json()['item'][0]['media_id'])
+aa ='还是测试\n测试了一遍又一遍\n快点给个好评\n'
+ss = pack_info(aa, image_id().json()['item'][0]['media_id'])
 print(ss.json())
 # print(image_id().json())
 # bitlist = get_bitlist()
