@@ -58,6 +58,9 @@ def get_bitlist():
     driver.implicitly_wait(5)
 
     bitlist = []
+    encrycode = []
+    type_id = []
+    danyilaiyuan_url = "https://caigou.chinatelecom.com.cn/MSS-PORTAL/purchaseannouncebasic/viewHome.do?encryCode=%s&noticeType=0&id=%s"
     todaycount = 0
     forceend = False
     today = int(time.strftime('%Y%m%d', time.localtime()))
@@ -73,19 +76,25 @@ def get_bitlist():
     time.sleep(1)
     next_page = driver.find_element(By.XPATH, '/html/body/form/div/div[1]/div[2]/table[4]/tbody/tr/td[10]/a[1]/img')
     while next_page.is_enabled():
-        divs = driver.find_elements(By.CLASS_NAME, 'table_data')  # 获取当前页面数据
-        pageitem = divs[0].text.split('\n')  # 切分存入列表
-        pageitem.pop(0)
-        for i in pageitem:
-            checkitem = i.split(' ')
-            try:
-                checkdate = int(checkitem[5].replace('-', ''))
-            except ValueError:
-                checkdate = int(checkitem[6].replace('-', ''))
+        bit_name = []
+        bit_crdate = []
+        hyperlink = []
+        #获取标签中的onlick值，用来生成链接
+        for i in range(0,10):
+            bit_name.append(driver.find_element(By.CSS_SELECTOR,'table.table_data > tbody > tr:nth-child(%s) > td:nth-child(3) > a'%(i+2)).text)
+            bit_crdate.append(driver.find_element(By.CSS_SELECTOR,'table.table_data > tbody > tr:nth-child(%s) > td:nth-child(6)'%(i+2)).text)
+        #用正则表达式提取里面的encryCode和id，位于view后面的第三和第一个括号内
+#            html_tag =
+            hyperlink.append(driver.find_element(By.CSS_SELECTOR,'table.table_data > tbody > tr:nth-child(%s) > td:nth-child(3) > a'%(i+2)).get_attribute('onclick'))
+        #提取pageitem中的每一个元素，单独包装为一个list
+        for i in range(len(bit_crdate)):
+            hyperlink[i] = hyperlink[i][4:].replace('(','').replace(')','').replace('\'','')
+            encrycode.append(hyperlink[i].split(',')[2])
+            type_id.append(hyperlink[i].split(',')[0])
+            checkdate = int(bit_crdate[i].replace('-','')[0:8])
             if checkdate == today or checkdate == today - 1 or checkdate == today - 2:
                 todaycount = todaycount + 1
-                bitlist.append(checkitem[2])
-            #            print(checkdate)
+                bitlist.append(bit_name[i]+danyilaiyuan_url%(encrycode[i],type_id[i]))
             else:
                 forceend = True
                 break
@@ -97,6 +106,7 @@ def get_bitlist():
             next_page = driver.find_element(By.XPATH,
                                             '/html/body/form/div/div[1]/div[2]/table[4]/tbody/tr/td[10]/a[1]/img')
     bitlist.append('广西电信近三日共有%s条招标信息' % todaycount)
+    driver.quit()
     return bitlist  # 返回一个list
 
 
@@ -148,15 +158,13 @@ def get_draft_id():
 
 
 # 重新采用send_message方法！
-
-
 # 第一步：获取招标信息
 aa = get_bitlist()
 print(aa)
 print(len(aa))
 
 # 第二步：每次最多发送10条，然后要求用户回复
-test_id = all_user()[0]
+test_id = 'o-4JI0ibLP9genCK8KVGz_KKkWWE' #刘刚的openid
 if len(aa) >= 9:
     total = 10
 else:
@@ -171,6 +179,9 @@ else:
     print('还有%s条信息未发送' % len(aa))
     send_msg('还有%s条信息未发送' % len(aa), test_id)
 
+
+
+#以下是通过草稿箱群发的代码，已弃用！
 # bb = all_user()[0]
 # print(bb)
 # send_msg("这还是一个测试",bb)
