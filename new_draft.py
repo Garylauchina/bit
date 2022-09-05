@@ -61,7 +61,7 @@ def get_bitlist():
     driver = webdriver.Chrome(options=chrome_options)
     driver.implicitly_wait(5)
 
-    bitlist = []
+    bitlist = ''
     todaycount = 0
     forceend = False
     today = int(time.strftime('%Y%m%d', time.localtime()))
@@ -88,7 +88,7 @@ def get_bitlist():
                 checkdate = int(checkitem[6].replace('-', ''))
             if checkdate == today or checkdate == today - 1 or checkdate == today - 2:
                 todaycount = todaycount + 1
-                bitlist.append(checkitem[2])
+                bitlist = bitlist + checkitem[2] + '\n'
             #            print(checkdate)
             else:
                 forceend = True
@@ -100,6 +100,7 @@ def get_bitlist():
             time.sleep(1)
             next_page = driver.find_element(By.XPATH,
                                             '/html/body/form/div/div[1]/div[2]/table[4]/tbody/tr/td[10]/a[1]/img')
+    bitlist = '广西电信近三日共有%s条招标信息\n' % todaycount + bitlist
     return bitlist
 
 
@@ -111,8 +112,9 @@ def image_id():
     return r
 
 
-# 将获取的信息打包到一个草稿中
+# 将草稿箱清空，并将获取的信息放入第一份草稿中
 def pack_info(get_info, get_img):
+    count_url = '/draft/count?access_token=%s'
     pack_url = '/draft/add?access_token=%s'
     title = time.strftime('%Y-%m-%d', time.localtime()) + '招标列表'
     data = {
@@ -127,16 +129,46 @@ def pack_info(get_info, get_img):
             "thumb_media_id": get_img
         }]
     }
-    post_data = json.dumps(data,ensure_ascii=False).encode('utf-8')
+    post_data = json.dumps(data, ensure_ascii=False).encode('utf-8')
     r = requests.post(base_url + pack_url % access_token, data=post_data)
     return r
 
-aa ='还是测试\n测试了一遍又一遍\n快点给个好评\n'.replace('\n','<br>')
-ss = pack_info(aa, image_id().json()['item'][0]['media_id'])
+
+# 将草稿箱的一份文档发送至公众号
+def send_draft(get_media_id):
+    send_draft_url = '/freepublish/submit?access_token=%s'
+    media_id = {"media_id": get_media_id}
+    r = requests.post(base_url + send_draft_url % access_token,
+                      json.dumps(media_id, ensure_ascii=False).encode('utf-8'))
+    return r
+
+
+# 获得草稿箱中第一份文档的id
+def get_draft_id():
+    get_draft_url = '/draft/batchget?access_token=%s'
+    files = {"offset": 0, "count": 1, "no_content": 1}
+    r = requests.post(base_url + get_draft_url % access_token, json.dumps(files, ensure_ascii=False).encode('utf-8'))
+    return r
+
+
+# 第一步：获取招标信息
+aa = get_bitlist()
+print(aa)
+
+# 第二步：打包消息发送到草稿箱中
+ss = pack_info(aa.replace('\n','<br>'), image_id().json()['item'][0]['media_id'])
 print(ss.json())
-# print(image_id().json())
-# bitlist = get_bitlist()
-# print(bitlist)
+
+# 第三部：获得草稿箱中第一份文档id，并发送至公众号
+bb = get_draft_id().json()['item'][0]['media_id']
+print(bb)
+cc = send_draft(bb)
+print(cc.json())
+#
 # send_msg(bitlist,all_user())
 # print('近三日共有%s条招标信息' % len(bitlist))
 # send_msg('近三日共有%s条招标信息' % len(bitlist))
+#
+# print(aa)
+# bb = send_draft(aa)
+# print(bb.json())
