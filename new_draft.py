@@ -25,7 +25,7 @@ def all_user():
     a = a.json()['data']['openid']
     for n in range(len(a)):
         id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
-        print(id_info.json())
+#        print(id_info.json())
     return a
 
 
@@ -154,12 +154,15 @@ def get_draft_id():
 
 
 # 第一步：获取招标信息
-aa = get_bitlist()
-print(aa)
-print(len(aa))
+#aa = get_bitlist()
+#print(aa)
+#rint(len(aa))
+
 
 #第二步：发送前20条，如果多于20条，要求用户回复
-
+bb = [all_user()[0]]
+print(bb)
+send_msg("这还是一个测试",bb)
 
 '''
 # 第二步：打包消息发送到草稿箱中
