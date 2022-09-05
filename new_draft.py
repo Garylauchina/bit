@@ -118,7 +118,7 @@ def pack_info(get_info, get_img):
     data = {
         "articles": [{
             "title": title,
-            "author": "tyzh",
+            "author": "刘刚",
             "content": get_info,
             "content_source_url": "",
             "need_open_comment": 0,
@@ -131,7 +131,7 @@ def pack_info(get_info, get_img):
     r = requests.post(base_url + pack_url % access_token, data=post_data)
     return r
 
-aa ='还是测试\n测试了一遍又一遍\n快点给个好评\n'
+aa ='还是测试\n测试了一遍又一遍\n快点给个好评\n'.replace('\n','<br>')
 ss = pack_info(aa, image_id().json()['item'][0]['media_id'])
 print(ss.json())
 # print(image_id().json())
