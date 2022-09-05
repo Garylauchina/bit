@@ -25,7 +25,7 @@ def all_user():
     a = a.json()['data']['openid']
     for n in range(len(a)):
         id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
-#        print(id_info.json())
+    #        print(id_info.json())
     return a
 
 
@@ -34,18 +34,14 @@ def send_msg(get_message, get_user):
     content = {
         'content': get_message
     }
-    msg_pkg = {}
-    for n in range(len(get_user)):
-        msg_pkg['touser'] = get_user[n]
-        msg_pkg['msgtype'] = 'text'
-        msg_pkg['text'] = content
-        r = requests.post(base_url + send_url % access_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-        id_info = requests.get(base_url + id_info_url % (access_token, get_user[n]))
-        if r.json()['errcode'] != 0:
-            print('第%s个用户%s发送失败' % ((n + 1), id_info.json()['remark']))
-            print(r.json()['errmsg'])
-        else:
-            print('第%s个用户%s发送成功，请查收！' % ((n + 1), id_info.json()['remark']))
+    msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
+    r = requests.post(base_url + send_url % access_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
+    #    id_info = requests.get(base_url + id_info_url % (access_token, get_user[n]))
+    if r.json()['errcode'] != 0:
+        print('发送失败')
+        print(r.json()['errmsg'])
+    else:
+        print('发送成功，请查收！')
     return
 
 
@@ -101,7 +97,7 @@ def get_bitlist():
             next_page = driver.find_element(By.XPATH,
                                             '/html/body/form/div/div[1]/div[2]/table[4]/tbody/tr/td[10]/a[1]/img')
     bitlist.append('广西电信近三日共有%s条招标信息' % todaycount)
-    return bitlist
+    return bitlist  # 返回一个list
 
 
 # 获取素材库中的一个素材id
@@ -150,19 +146,34 @@ def get_draft_id():
     r = requests.post(base_url + get_draft_url % access_token, json.dumps(files, ensure_ascii=False).encode('utf-8'))
     return r
 
-#重新采用send_message方法！
+
+# 重新采用send_message方法！
 
 
 # 第一步：获取招标信息
-#aa = get_bitlist()
-#print(aa)
-#rint(len(aa))
+aa = get_bitlist()
+print(aa)
+print(len(aa))
 
+# 第二步：每次最多发送10条，然后要求用户回复
+test_id = all_user()[0]
+if len(aa) >= 9:
+    total = 10
+else:
+    total = len(aa)
+for i in range(total):
+    send_msg(aa[0], test_id)
+    aa.pop(0)
+if len(aa) == 0:
+    print('已全部发送')
+    send_msg('已全部发送', test_id)
+else:
+    print('还有%s条信息未发送' % len(aa))
+    send_msg('还有%s条信息未发送' % len(aa), test_id)
 
-#第二步：发送前20条，如果多于20条，要求用户回复
-bb = [all_user()[0]]
-print(bb)
-send_msg("这还是一个测试",bb)
+# bb = all_user()[0]
+# print(bb)
+# send_msg("这还是一个测试",bb)
 
 '''
 # 第二步：打包消息发送到草稿箱中
