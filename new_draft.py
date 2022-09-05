@@ -150,7 +150,9 @@ def get_draft_id():
     r = requests.post(base_url + get_draft_url % access_token, json.dumps(files, ensure_ascii=False).encode('utf-8'))
     return r
 
+#重新采用send_message方法！
 
+'''
 # 第一步：获取招标信息
 aa = get_bitlist()
 print(aa)
@@ -172,3 +174,4 @@ print(cc.json())
 # print(aa)
 # bb = send_draft(aa)
 # print(bb.json())
+'''
