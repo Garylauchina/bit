@@ -61,7 +61,7 @@ def get_bitlist():
     driver = webdriver.Chrome(options=chrome_options)
     driver.implicitly_wait(5)
 
-    bitlist = ''
+    bitlist = []
     todaycount = 0
     forceend = False
     today = int(time.strftime('%Y%m%d', time.localtime()))
@@ -88,7 +88,7 @@ def get_bitlist():
                 checkdate = int(checkitem[6].replace('-', ''))
             if checkdate == today or checkdate == today - 1 or checkdate == today - 2:
                 todaycount = todaycount + 1
-                bitlist = bitlist + checkitem[2] + '\n'
+                bitlist.append(checkitem[2])
             #            print(checkdate)
             else:
                 forceend = True
@@ -100,7 +100,7 @@ def get_bitlist():
             time.sleep(1)
             next_page = driver.find_element(By.XPATH,
                                             '/html/body/form/div/div[1]/div[2]/table[4]/tbody/tr/td[10]/a[1]/img')
-    bitlist = '广西电信近三日共有%s条招标信息\n' % todaycount + bitlist
+    bitlist.append('广西电信近三日共有%s条招标信息' % todaycount)
     return bitlist
 
 
@@ -152,11 +152,16 @@ def get_draft_id():
 
 #重新采用send_message方法！
 
-'''
+
 # 第一步：获取招标信息
 aa = get_bitlist()
 print(aa)
+print(len(aa))
 
+#第二步：发送前20条，如果多于20条，要求用户回复
+
+
+'''
 # 第二步：打包消息发送到草稿箱中
 ss = pack_info(aa.replace('\n','<br>'), image_id().json()['item'][0]['media_id'])
 print(ss.json())
