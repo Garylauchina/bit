@@ -1,3 +1,5 @@
+import time
+
 import requests
 import json
 
@@ -122,4 +124,6 @@ def send_sunshine(page,get_id):
     for i in send_list:
         print(i)
         send_msg(i, get_id)
+        time.sleep(2)
     return
+
