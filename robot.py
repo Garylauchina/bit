@@ -10,8 +10,7 @@ def echo(message):
 
 @robot.click
 def option(msg):
-    print(type(msg))
-    print(msg)
+    print(msg.source)
     if msg.key == 'v1':
         return '正在查询，请稍后。。。'
     if msg.key == 'v2':
