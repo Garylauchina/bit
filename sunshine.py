@@ -94,7 +94,7 @@ def cm_list():
         'noticeBean.endDate': '',
         '_qt': 'zNmhTMITY3UzMlZDNklTY1I2NkBTOllTOhVGZ3IWOld',
     }
-    r = requests.post(url, data=data, headers=headers)
+    r = requests.post(url, json=data, headers=headers)
     return r
 
 

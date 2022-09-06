@@ -13,9 +13,14 @@ print(access_token)
 menu = {
     "button": [
         {
+            'type':'click',
+            'name':'查询',
+            'key':'v1'
+        },
+        {
             "type": "click",
             "name": "点赞",
-            "key": "V1001_GOOD"
+            "key": "v2"
         }
     ]
 }
