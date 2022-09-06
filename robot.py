@@ -8,8 +8,8 @@ def echo(message):
     return '别发了我不是聊天机器人！'
 
 
-@robot.click()
-def echo(msg):
+@robot.click
+def option(msg):
     print(type(msg))
     print(msg)
     if msg.key == 'v1':
@@ -19,7 +19,7 @@ def echo(msg):
 
 
 @robot.subscribe
-def options(msg):
+def welcome(msg):
     return '欢迎使用！'
 
 
