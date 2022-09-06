@@ -4,18 +4,23 @@ robot = werobot.WeRoBot(token='Dcbpes2098')
 
 
 @robot.handler
+def echo(message):
+    return '别发了我不是聊天机器人！'
+
+
+@robot.click()
 def echo(msg):
     print(type(msg))
     print(msg)
-    if msg.content == '1':
+    if msg.key == 'v1':
         return '正在查询，请稍后。。。'
-    else:
-        return '1---广西电信招标'
+    if msg.key == 'v2':
+        return '请点赞支持！'
 
 
 @robot.subscribe
 def options(msg):
-    return '1---广西电信招标'
+    return '欢迎使用！'
 
 
 robot.config['HOST'] = '0.0.0.0'
