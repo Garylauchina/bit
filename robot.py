@@ -5,6 +5,7 @@ robot = werobot.WeRoBot(token='Dcbpes2098')
 
 @robot.handler
 def echo(msg):
+    print(type(msg))
     print(msg)
     if msg.content == '1':
         return '正在查询，请稍后。。。'
