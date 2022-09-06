@@ -1,5 +1,6 @@
 import werobot
 from sunshine import *
+import time
 
 robot = werobot.WeRoBot(token='Dcbpes2098')
 
