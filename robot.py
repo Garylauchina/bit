@@ -13,9 +13,9 @@ def echo(message):
 def option(msg):
     print(msg.source)
     if msg.key == 'v1':
-        send_msg('正在查询，请稍后。。。')
+        send_msg('正在查询，请稍后。。。',msg.source)
         time.sleep(3)
-        send_sunshine('1')
+        send_sunshine(1,msg.source)
         return "查询完成！"
     if msg.key == 'v2':
         return '请点赞支持！'

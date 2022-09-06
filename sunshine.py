@@ -114,12 +114,12 @@ def send_msg(get_message, get_user):
     return
 
 
-def send_sunshine(page):
+def send_sunshine(page,get_id):
     get_list = sunshine_list(page)  # 获取第一页，字典格式
     send_list = []
     for i in get_list:
         send_list.append(i['docTitle'] + '\n' + i['docType'])
     for i in send_list:
         print(i)
-        send_msg(i, test_id)
+        send_msg(i, get_id)
     return
