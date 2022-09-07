@@ -7,13 +7,27 @@ argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
 argu3 = '6bf950052b38e94da3259b5a4bc11e12'
 base_url = 'https://api.weixin.qq.com/cgi-bin'
-token_url = '/token?grant_type=%s&appid=%s&secret=%s' % (argu1, argu2, argu3)
-#    get_id_url = '/user/get?access_token=%s&next_openid'
+test_id = 'o-4JI0qhR7p3irhZCY2eGKtLar2E'  # 刘刚的openid
+
+def all_user(get_token):
+    get_id_url = '/user/get?access_token=%s&next_openid'
+    a = requests.get(base_url + get_id_url % get_token).json()['data']['openid']
+#    print('总共%s名用户' % a.json()['total'])
+    print(a)
+#    a = a.json()['data']
+#    for n in range(len(a)):
+#        id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
+    #        print(id_info.json())
+    return a
+
+def Access_Token():
+    token_url = '/token?grant_type=%s&appid=%s&secret=%s' % (argu1, argu2, argu3)
+#
 #    id_info_url = '/user/info?access_token=%s&openid=%s&lang=zh_CN'
-send_url = '/message/custom/send?access_token=%s'
-access_token = requests.get(base_url + token_url).json()['access_token']
-print('获取token成功：' + access_token)
-test_id = 'o-4JI0ibLP9genCK8KVGz_KKkWWE'  # 刘刚的openid
+    a = requests.get(base_url + token_url).json()
+    print('获取token成功：' + a['access_token'])
+    print('有效期：'+str(a['expires_in'])+'秒')
+    return a['access_token']
 
 
 def sunshine_list(pagenum):
@@ -101,13 +115,14 @@ def cm_list():
 
 
 # 向微信公众号发送消息
-def send_msg(get_message, get_user):
+def send_msg(get_message, get_user,get_token):
+    send_url = '/message/custom/send?access_token=%s'
     content = {
         'content': get_message
     }
     msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
-    r = requests.post(base_url + send_url % access_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-    #    id_info = requests.get(base_url + id_info_url % (access_token, get_user[n]))
+    r = requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
+    #    id_info = requests.get(base_url + id_info_url % (get_token, get_user[n]))
     if r.json()['errcode'] != 0:
         print('发送失败')
         print(r.json()['errmsg'])
@@ -115,7 +130,7 @@ def send_msg(get_message, get_user):
         print('发送成功，请查收！')
     return
 
-
+'''
 def send_sunshine(page,get_id):
     get_list = sunshine_list(page)  # 获取第一页，字典格式
     send_list = []
@@ -124,6 +139,5 @@ def send_sunshine(page,get_id):
     for i in send_list:
         print(i)
         send_msg(i, get_id)
-        time.sleep(2)
     return
-
+'''
