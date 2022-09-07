@@ -1,7 +1,6 @@
 import werobot
 from sunshine import *
 import time
-import copy
 
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = Access_Token()
@@ -12,8 +11,9 @@ user_label = {}
 user_store = []
 threedays_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了近三天的招标信息，需定时更新
 for i in user_list:
-    user_label = {'openid':i,'wait_to_send':[]}
-    user_store.append(copy.copy(user_label))
+    user_label['openid'] = i,
+    user_label['wait_to_send'] = []
+    user_store.append(user_label.copy())
 print(user_store)
 
 
@@ -44,10 +44,13 @@ def option(msg):
         for i in user_store:  # 遍历user_store
             if i['openid'] == msg.source:  # 检索库中的用户id
                 if len(i['wait_to_send']) == 0:  # 如果待发送库中列表为0，
-                    to_send_list = copy.copy(threedays_list)  # 则复制threedays_list,
-                for j in range([10, len(to_send_list)][len(to_send_list) <= 10]):  # 如果超过十条就发十条，不超过就全发
+                    to_send_list = threedays_list.copy()  # 则复制threedays_list,
+                loop = len(to_send_list)
+                if len(to_send_list) > 10:
+                    loop = 10
+                for j in range(loop):  # 如果超过十条就发十条，不超过就全发
                     send_msg(to_send_list.pop[0]['docTitle'], msg.source, access_token)
-               if len(to_send_list) == 0:
+                if len(to_send_list) == 0:
                     i['wait_to_send'] = []
                     send_msg('查询完成', msg.source, access_token)  # 最后检查，如果待发送库中列表为0，则最后一条发送为"完成"，
                     return '查询完成'
