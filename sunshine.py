@@ -1,5 +1,5 @@
 import time
-
+import copy
 import requests
 import json
 
@@ -7,32 +7,37 @@ argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
 argu3 = '6bf950052b38e94da3259b5a4bc11e12'
 base_url = 'https://api.weixin.qq.com/cgi-bin'
-test_id = 'o-4JI0qhR7p3irhZCY2eGKtLar2E'  # 刘刚的openid
+test_id = 'o-4JI0ibLP9genCK8KVGz_KKkWWE'  # 刘刚的openid
+
 
 def all_user(get_token):
     get_id_url = '/user/get?access_token=%s&next_openid'
     a = requests.get(base_url + get_id_url % get_token).json()['data']['openid']
-#    print('总共%s名用户' % a.json()['total'])
+    #    print('总共%s名用户' % a.json()['total'])
     print(a)
-#    a = a.json()['data']
-#    for n in range(len(a)):
-#        id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
+    #    a = a.json()['data']
+    #    for n in range(len(a)):
+    #        id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
     #        print(id_info.json())
     return a
 
+
 def Access_Token():
     token_url = '/token?grant_type=%s&appid=%s&secret=%s' % (argu1, argu2, argu3)
-#
-#    id_info_url = '/user/info?access_token=%s&openid=%s&lang=zh_CN'
+    #
+    #    id_info_url = '/user/info?access_token=%s&openid=%s&lang=zh_CN'
     a = requests.get(base_url + token_url).json()
     print('获取token成功：' + a['access_token'])
-    print('有效期：'+str(a['expires_in'])+'秒')
+    print('有效期：' + str(a['expires_in']) + '秒')
     return a['access_token']
 
 
-def sunshine_list(pagenum):
+def sunshine_list():
     # 中国电信阳光采购网
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
+    bit_list = []
+    today = int(time.strftime('%Y%m%d', time.localtime()))
+    force_end = False
     headers = {
         'Accept': 'application/json,text/plain,*/*',
         'Accept-Encoding': 'gzip,deflate,br',
@@ -53,7 +58,7 @@ def sunshine_list(pagenum):
         'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,likeGecko)Chrome/105.0.0.0Safari/537.36',
     }
     data = {
-        'pageNum': pagenum,
+        'pageNum': 1,
         'pageSize': 10,
         'provinceCode': "10",
         'queryEndTime': "",
@@ -61,20 +66,31 @@ def sunshine_list(pagenum):
         'title': "",
         'type': "0"
     }
-    r = requests.post(url, json=data, headers=headers)
-    bit_list = r.json()['data']['list']
-    print(len(bit_list))
-    for i in bit_list:
-        for j in ['id', 'searchValue', 'updateBy', 'updateTime', 'remark', 'createBy', 'createTime', 'securityCode',
-                  'idEncryStr',
-                  'encryCode', 'encryEditCode', 'encryViewCode', 'endRow', 'pageNum', 'pageSize', 'orderByColumn',
-                  'isSelf',
-                  'userIdentity', 'isAsc', 'params', 'idEncryStrForFile', 'encryDeleteCode', 'count', 'startRow',
-                  'isCancel',
-                  'companyName', 'pageView', 'business_type', 'user_collection', 'provinceCode', 'parProvider',
-                  'provinceName',
-                  'function_type']:
-            i.pop(j)
+    while not force_end:
+        r = requests.post(url, json=data, headers=headers)
+        r = r.json()['data']['list']
+        print(len(bit_list))
+        # for i in range(len(bit_list)):
+        #     for j in ['id', 'searchValue', 'updateBy', 'updateTime', 'remark', 'createBy', 'createTime', 'securityCode',
+        #               'idEncryStr',
+        #               'encryCode', 'encryEditCode', 'encryViewCode', 'endRow', 'pageNum', 'pageSize', 'orderByColumn',
+        #               'isSelf',
+        #               'userIdentity', 'isAsc', 'params', 'idEncryStrForFile', 'encryDeleteCode', 'count', 'startRow',
+        #               'isCancel',
+        #               'companyName', 'pageView', 'business_type', 'user_collection', 'provinceCode', 'parProvider',
+        #               'provinceName',
+        #               'function_type']:
+        #         del bit_list[i][j]
+        for i in range(len(r)):
+            checkday = int(r[i]['createDate'].replace('-', '')[0:8])
+            if today - checkday <= 1:
+                bit_list.append(r[i])
+            else:
+                force_end = True
+        if force_end:
+            break
+        else:
+            data['pageNum'] = data['pageNum'] + 1
     return bit_list
 
 
@@ -115,7 +131,7 @@ def cm_list():
 
 
 # 向微信公众号发送消息
-def send_msg(get_message, get_user,get_token):
+def send_msg(get_message, get_user, get_token):
     send_url = '/message/custom/send?access_token=%s'
     content = {
         'content': get_message
@@ -129,6 +145,7 @@ def send_msg(get_message, get_user,get_token):
     else:
         print('发送成功，请查收！')
     return
+
 
 '''
 def send_sunshine(page,get_id):
