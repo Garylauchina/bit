@@ -30,13 +30,6 @@ def refresh_token():
     return
 
 
-def put_list_store(get_id):
-    for j in user_store:
-        if j['openid'] == get_id:
-            j['wait_to_send'] = today_list
-    return
-
-
 @robot.handler
 def echo(msg):
     refresh_token()
@@ -59,14 +52,14 @@ def echo(msg):
                     send_msg('发送完毕', msg.source, access_token)
                     return '发送完毕'
     else:
-        return '别考我我不是聊天机器人！'
+        return '1---电信招标网（阳光）'
 
 
 
 @robot.subscribe
 def welcome(msg):
     refresh_token()
-    return '欢迎使用！'
+    return '1---电信招标网（阳光）'
 
 
 robot.config['HOST'] = '0.0.0.0'
