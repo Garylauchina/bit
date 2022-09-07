@@ -131,7 +131,7 @@ def cm_list():
 
 
 # 向微信公众号发送消息
-def send_msg(get_message, get_user, get_token):
+def send_msg(get_message, get_user,get_token):
     send_url = '/message/custom/send?access_token=%s'
     content = {
         'content': get_message
