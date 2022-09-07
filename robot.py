@@ -10,10 +10,10 @@ user_list = all_user(access_token)
 user_label = {}
 user_store = []
 threedays_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了近三天的招标信息，需定时更新
-print('共搜索到%s条招标信息'%len(threedays_list))
+print('共搜索到%s条招标信息' % len(threedays_list))
 for i in user_list:
     user_label['openid'] = i
-    user_label['wait_to_send'] = []
+    user_label['last_send'] = 0
     user_store.append(user_label.copy())
 print(user_store)
 
@@ -26,43 +26,44 @@ def refresh_token():
         token_time = int(time.time())
         print('token已刷新，有效时间7200秒')
     else:
-        print('token未过期，有效时间%s秒' % (7200-(int(time.time()) - token_time)))
+        print('token未过期，有效时间%s秒' % (7200 - (int(time.time()) - token_time)))
     return
 
 
 def put_list_store(get_id):
-    for i in user_store:
-        if i['openid'] == get_id:
-            i['wait_to_send'] = threedays_list
+    for j in user_store:
+        if j['openid'] == get_id:
+            j['wait_to_send'] = threedays_list
     return
+
 
 @robot.handler
 def echo(msg):
     refresh_token()
     return '别发了我不是聊天机器人！'
 
+
 @robot.click
 def option(msg):
     refresh_token()
     print(msg.source)
     if msg.key == 'v1':
-        for i in user_store:  # 遍历user_store
-            if i['openid'] == msg.source:  # 检索库中的用户id
-                if len(i['wait_to_send']) == 0:  # 如果待发送库中列表为0，
-                    to_send_list = threedays_list.copy()  # 则复制threedays_list,
-                loop = len(to_send_list)
-                if len(to_send_list) > 10:
-                    loop = 10
-                for j in range(loop):  # 如果超过十条就发十条，不超过就全发
-                    send_msg(to_send_list.pop[0]['docTitle'], msg.source, access_token)
-                if len(to_send_list) == 0:
-                    i['wait_to_send'] = []
-                    send_msg('查询完成', msg.source, access_token)  # 最后检查，如果待发送库中列表为0，则最后一条发送为"完成"，
-                    return '查询完成'
+        for j in user_store:  # 遍历user_store
+            if j['openid'] == msg.source:  # 检索库中的用户id
+                if len(threedays_list) - j['last_send'] > 10:  # 如果存在未发数据
+                    wait_to_send = threedays_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多10条并发送
+                    for k in range(len(wait_to_send)):
+                        send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
+                    j['last_send'] += 10  # 发送完成，更新用户的发送标记
+                    send_msg('点击继续', msg.source, access_token)
+                    return '点击继续'
                 else:
-                    send_msg('点击继续发送', msg.source, access_token)  # 否则为"继续点击"
-                    i['wait_to_send'] = to_send_list
-                    return '等待用户点击'
+                    wait_to_send = threedays_list[j['last_send']::]
+                    for k in range(len(wait_to_send)):
+                        send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
+                    j['last_send'] += 0  # 发送完成，清除标记
+                    send_msg('发送完毕', msg.source, access_token)
+                    return '发送完毕'
     if msg.key == 'v2':
         return '祝您中标！'
 
@@ -71,8 +72,6 @@ def option(msg):
 def welcome(msg):
     refresh_token()
     return '欢迎使用！'
-
-
 
 
 robot.config['HOST'] = '0.0.0.0'
