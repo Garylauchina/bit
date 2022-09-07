@@ -40,14 +40,8 @@ def put_list_store(get_id):
 @robot.handler
 def echo(msg):
     refresh_token()
-    return '别发了我不是聊天机器人！'
-
-
-@robot.click
-def option(msg):
-    refresh_token()
     print(msg.source)
-    if msg.key == 'v1':
+    if msg.content == '1':
         for j in user_store:  # 遍历user_store
             if j['openid'] == msg.source:  # 检索库中的用户id
                 if len(today_list) - j['last_send'] > 10:  # 如果存在未发数据
@@ -64,8 +58,9 @@ def option(msg):
                     j['last_send'] += 0  # 发送完成，清除标记
                     send_msg('发送完毕', msg.source, access_token)
                     return '发送完毕'
-    if msg.key == 'v2':
-        return '祝您中标！'
+    else:
+        return '别考我我不是聊天机器人！'
+
 
 
 @robot.subscribe
