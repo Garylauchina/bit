@@ -9,8 +9,8 @@ user_list = all_user(access_token)
 
 user_label = {}
 user_store = []
-threedays_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了近三天的招标信息，需定时更新
-print('共搜索到%s条招标信息' % len(threedays_list))
+today_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了当天的招标信息，需定时更新
+print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
     user_label['openid'] = i
     user_label['last_send'] = 0
@@ -51,10 +51,10 @@ def option(msg):
         for j in user_store:  # 遍历user_store
             if j['openid'] == msg.source:  # 检索库中的用户id
                 if len(threedays_list) - j['last_send'] > 10:  # 如果存在未发数据
-                    wait_to_send = threedays_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多10条并发送
+                    wait_to_send = threedays_list[j['last_send']:j['last_send'] + 3]  # 则切片最多最多3条并发送
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
-                    j['last_send'] += 10  # 发送完成，更新用户的发送标记
+                    j['last_send'] += 3  # 发送完成，更新用户的发送标记
                     send_msg('点击继续', msg.source, access_token)
                     return '点击继续'
                 else:

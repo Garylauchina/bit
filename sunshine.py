@@ -70,20 +70,8 @@ def sunshine_list():
         r = requests.post(url, json=data, headers=headers)
         r = r.json()['data']['list']
         print(len(bit_list))
-        # for i in range(len(bit_list)):
-        #     for j in ['id', 'searchValue', 'updateBy', 'updateTime', 'remark', 'createBy', 'createTime', 'securityCode',
-        #               'idEncryStr',
-        #               'encryCode', 'encryEditCode', 'encryViewCode', 'endRow', 'pageNum', 'pageSize', 'orderByColumn',
-        #               'isSelf',
-        #               'userIdentity', 'isAsc', 'params', 'idEncryStrForFile', 'encryDeleteCode', 'count', 'startRow',
-        #               'isCancel',
-        #               'companyName', 'pageView', 'business_type', 'user_collection', 'provinceCode', 'parProvider',
-        #               'provinceName',
-        #               'function_type']:
-        #         del bit_list[i][j]
         for i in range(len(r)):
-            checkday = int(r[i]['createDate'].replace('-', '')[0:8])
-            if today - checkday <= 1:
+            if today == int(r[i]['createDate'].replace('-', '')[0:8])+1:  # 判断发布时间是否当天
                 bit_list.append(r[i])
             else:
                 force_end = True
@@ -131,7 +119,7 @@ def cm_list():
 
 
 # 向微信公众号发送消息
-def send_msg(get_message, get_user,get_token):
+def send_msg(get_message, get_user, get_token):
     send_url = '/message/custom/send?access_token=%s'
     content = {
         'content': get_message
