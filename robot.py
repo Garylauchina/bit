@@ -12,7 +12,7 @@ user_store = []
 threedays_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了近三天的招标信息，需定时更新
 print('共搜索到%s条招标信息'%len(threedays_list))
 for i in user_list:
-    user_label['openid'] = i,
+    user_label['openid'] = i
     user_label['wait_to_send'] = []
     user_store.append(user_label.copy())
 print(user_store)
