@@ -38,17 +38,17 @@ def echo(msg):
         for j in user_store:  # 遍历user_store
             if j['openid'] == msg.source:  # 检索库中的用户id
                 if len(today_list) - j['last_send'] > 10:  # 如果存在未发数据
-                    wait_to_send = today_list[j['last_send']:j['last_send'] + 3]  # 则切片最多最多3条并发送
+                    wait_to_send = today_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多3条并发送
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
-                    j['last_send'] += 3  # 发送完成，更新用户的发送标记
+                    j['last_send'] += 10  # 发送完成，更新用户的发送标记
                     send_msg('点击继续', msg.source, access_token)
                     return '点击继续'
                 else:
                     wait_to_send = today_list[j['last_send']::]
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
-                    j['last_send'] += 0  # 发送完成，清除标记
+                    j['last_send'] = 0  # 发送完成，清除标记
                     send_msg('发送完毕', msg.source, access_token)
                     return '发送完毕'
     else:

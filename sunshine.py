@@ -125,13 +125,7 @@ def send_msg(get_message, get_user, get_token):
         'content': get_message
     }
     msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
-    r = requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-    #    id_info = requests.get(base_url + id_info_url % (get_token, get_user[n]))
-    if r.json()['errcode'] != 0:
-        print('发送失败')
-        print(r.json()['errmsg'])
-    else:
-        print('发送成功，请查收！')
+    requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
     return
 
 
