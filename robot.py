@@ -10,6 +10,7 @@ user_list = all_user(access_token)
 user_label = {}
 user_store = []
 threedays_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了近三天的招标信息，需定时更新
+print('共搜索到%s条招标信息'%len(threedays_list))
 for i in user_list:
     user_label['openid'] = i,
     user_label['wait_to_send'] = []
@@ -25,7 +26,7 @@ def refresh_token():
         token_time = int(time.time())
         print('token已刷新，有效时间7200秒')
     else:
-        print('token未过期，有效时间%s秒' % (int(time.time()) - token_time))
+        print('token未过期，有效时间%s秒' % (7200-(int(time.time()) - token_time)))
     return
 
 
@@ -35,6 +36,10 @@ def put_list_store(get_id):
             i['wait_to_send'] = threedays_list
     return
 
+@robot.handler
+def echo(msg):
+    refresh_token()
+    return '别发了我不是聊天机器人！'
 
 @robot.click
 def option(msg):
@@ -68,10 +73,6 @@ def welcome(msg):
     return '欢迎使用！'
 
 
-@robot.handler
-def echo(msg):
-    refresh_token()
-    return '别发了我不是聊天机器人！'
 
 
 robot.config['HOST'] = '0.0.0.0'
