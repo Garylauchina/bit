@@ -42,14 +42,12 @@ def echo(msg):
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
                     j['last_send'] += 10  # 发送完成，更新用户的发送标记
-                    send_msg('点击继续', msg.source, access_token)
-                    return '点击继续'
+                    return "还有%s条"%(len(today_list) - j['last_send'])
                 else:
                     wait_to_send = today_list[j['last_send']::]
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
                     j['last_send'] = 0  # 发送完成，清除标记
-                    send_msg('发送完毕', msg.source, access_token)
                     return '发送完毕'
     else:
         return '1---电信招标网（阳光）'
