@@ -25,6 +25,7 @@ def refresh_list(get_list):
     if time.time() - today_list_time > 1800:    #每三十分钟更新一次招标信息
         get_list = sunshine_list()
         today_list_time = time.time()
+        print('列表已更新')
     return get_list
 
 def refresh_token():
