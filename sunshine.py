@@ -2,6 +2,7 @@ import time
 import copy
 import requests
 import json
+from pprint import pprint
 
 argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
@@ -69,7 +70,7 @@ def sunshine_list():
     while not force_end:
         r = requests.post(url, json=data, headers=headers)
         r = r.json()['data']['list']
-        print(len(r))
+        pprint(r)
         for i in range(len(r)):
             if today == int(r[i]['createDate'].replace('-', '')[0:8]):  # 判断发布时间是否当天
                 bit_list.append(r[i])
@@ -83,39 +84,26 @@ def sunshine_list():
 
 
 def cm_list():
-    url = 'https://b2b.10086.cn/b2b/main/listVendorNoticeResult.html?noticeBean.noticeType=2'
-    headers = {
-        'Accept': '*/*',
-        'Accept - Encoding': 'gzip,deflate,br',
-        'Accept - Language': 'zh-CN,zh;q=0.9',
-        'Connection': 'keep-alive',
-        'Content - Length': '206',
-        'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8',
-        'Cookie': 'JSESSIONID=DDC0DAFF5B7A06BA1B807A2A2A1F33F3',
-        'Host': 'b2b.10086.cn',
-        'Origin': 'https://b2b.10086.cn',
-        'Referer': 'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2',
-        'sec-ch-ua': '"GoogleChrome";v="105","Not)A;Brand";v="8","Chromium";v="105"',
-        'sec-ch-ua-mobile': '?0',
-        'sec-ch-ua-platform': '"macOS"',
-        'Sec-Fetch-Dest': 'empty',
-        'Sec-Fetch-Mode': 'cors',
-        'Sec-Fetch-Site': 'same-origin',
-        'User - Agent': 'Mozilla / 5.0(Macintosh;Intel Mac OS X 10_15_7) AppleWebKit / 537.36(KHTML, like Gecko) Chrome / 105.0.0.0 Safari / 537.36',
-        'X - Requested - With': 'XMLHttpRequest',
-    }
-    data = {
-        'page.currentPage': '1',
-        'page.perPageSize': '20',
-        'noticeBean.sourceCH': '广西',
-        'noticeBean.source': 'GX',
-        'noticeBean.title': '',
-        'noticeBean.startDate': '',
-        'noticeBean.endDate': '',
-        '_qt': 'zNmhTMITY3UzMlZDNklTY1I2NkBTOllTOhVGZ3IWOld',
-    }
-    r = requests.post(url, json=data, headers=headers)
-    return r
+    url = 'https://b2b.10086.cn/b2b/supplier/b2bStyle/js/jquery.min.js'
+
+    headers={
+        'Accept':'*/*Accept-Encoding:gzip,deflate,br',
+        'Accept-Language':'zh-CN,zh;q=0.9',
+        'Cache-Control':'no-cache',
+        'Connection':'keep-alive',
+        'Cookie':'JSESSIONID=DF87C9F0D02A958FDCC3403147257AA7',
+        'Host':'b2b.10086.cn',
+        'Pragma':'no-cache',
+        'Referer':'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2',
+        'sec-ch-ua':'"GoogleChrome";v="105","Not)A;Brand";v="8","Chromium";v="105"',
+        'sec-ch-ua-mobile':'?0',
+        'sec-ch-ua-platform':'"macOS"',
+        'Sec-Fetch-Dest':'script',
+        'Sec-Fetch-Mode':'no-cors',
+        'Sec-Fetch-Site':'same-origin',
+        'User-Agent':'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,likeGecko)Chrome/105.0.0.0Safari/537.36',
+        }
+    return
 
 
 # 向微信公众号发送消息

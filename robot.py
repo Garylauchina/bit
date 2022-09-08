@@ -1,5 +1,5 @@
 import sched
-
+import pprint
 import werobot
 from sunshine import *
 import time
@@ -65,5 +65,5 @@ def welcome(msg):
 
 
 robot.config['HOST'] = '0.0.0.0'
-robot.config['PORT'] = 80
+robot.config['PORT'] = 2880
 robot.run()
