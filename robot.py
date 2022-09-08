@@ -1,7 +1,11 @@
+import sched
+
 import werobot
 from sunshine import *
 import time
 
+# s=sched.scheduler(time.time,time.sleep)
+# defperform_command(cmd,inc)
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = Access_Token()
 token_time = int(time.time())
