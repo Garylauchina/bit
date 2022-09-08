@@ -70,7 +70,7 @@ def sunshine_list():
     while not force_end:
         r = requests.post(url, json=data, headers=headers)
         r = r.json()['data']['list']
-        pprint(r)
+#        pprint(r)
         for i in range(len(r)):
             if today == int(r[i]['createDate'].replace('-', '')[0:8]):  # 判断发布时间是否当天
                 bit_list.append(r[i])
