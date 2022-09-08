@@ -46,7 +46,7 @@ def echo(msg):
     refresh_token()
     refresh_list(today_list)
     print(msg.source)
-    if msg.content == '1':
+    if msg.content == '2':
         for j in user_store:  # 遍历user_store
             if j['openid'] == msg.source:  # 检索库中的用户id
                 if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
@@ -62,7 +62,7 @@ def echo(msg):
                     j['film_send'] = 0  # 发送完成，清除标记
                     return '发送完毕'
     else:
-        if msg.content == '2':
+        if msg.content == '1':
             for j in user_store:  # 遍历user_store
                 if j['openid'] == msg.source:  # 检索库中的用户id
                     if len(today_list) - j['last_send'] > 10:  # 如果存在未发数据
