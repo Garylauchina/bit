@@ -4,8 +4,7 @@ import werobot
 from sunshine import *
 import time
 
-# s=sched.scheduler(time.time,time.sleep)
-# defperform_command(cmd,inc)
+print("版本1.1 加入supervisor进程")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = Access_Token()
 token_time = int(time.time())
@@ -61,6 +60,10 @@ def echo(msg):
 @robot.subscribe
 def welcome(msg):
     refresh_token()
+    user_list.append(msg.source)
+    user_label['openid'] = msg.source
+    user_label['last_send'] = 0
+    user_store.append(user_label.copy())
     return '1---电信招标网（阳光）'
 
 
