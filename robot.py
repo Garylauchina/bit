@@ -91,13 +91,14 @@ def echo(msg):
 
 @robot.subscribe
 def welcome(msg):
-    global today_list_time
+    global today_list_time, user_list, user_store
+    user_i = {}
     refresh_token()
     refresh_list(1)
     refresh_list(2)
     user_list.append(msg.source)
-    user_label['openid'] = msg.source
-    user_label['last_send'] = 0
+    user_i['openid'] = msg.source
+    user_i['last_send'] = 0
     user_store.append(user_label.copy())
     return '1---电信招标网（阳光）\n 2---热门影视'
 
