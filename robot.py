@@ -3,6 +3,7 @@ import werobot
 from sunshine import *
 import time
 
+print('启动时间：' + time.strftime('%Y-%m-%d %H:%m:%S'))
 print("版本1.1 加入supervisor进程")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = Access_Token()
@@ -13,7 +14,7 @@ user_label = {}
 user_store = []
 hot_film = film_list()
 today_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了当天的招标信息，需定时更新
-today_list_time = time.time()  #上次招标信息更新的时间
+today_list_time = time.time()  # 上次招标信息更新的时间
 print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
     user_label['openid'] = i
@@ -21,12 +22,15 @@ for i in user_list:
     user_label['film_send'] = 0
     user_store.append(user_label.copy())
 print(user_store)
+
+
 def refresh_list(get_time):
     global today_list
-    if time.time() - get_time > 1800:    #每三十分钟更新一次招标信息
+    if time.time() - get_time > 1800:  # 每三十分钟更新一次招标信息
         today_list = sunshine_list()
         print('列表已更新')
     return get_time
+
 
 def refresh_token():
     global access_token
@@ -54,7 +58,7 @@ def echo(msg):
                     for k in range(len(wait_to_send)):
                         send_msg(wait_to_send[k]['docTitle'], msg.source, access_token)
                     j['last_send'] += 10  # 发送完成，更新用户的发送标记
-                    return "还有%s条"%(len(today_list) - j['last_send'])
+                    return "还有%s条" % (len(today_list) - j['last_send'])
                 else:
                     wait_to_send = today_list[j['last_send']::]
                     for k in range(len(wait_to_send)):
@@ -79,7 +83,6 @@ def echo(msg):
                         return '发送完毕'
 
         return '1---电信招标网（阳光）\n 2---热门影视'
-
 
 
 @robot.subscribe
