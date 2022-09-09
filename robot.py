@@ -3,7 +3,9 @@ import werobot
 from sunshine import *
 import time
 
-print('启动时间：' + time.strftime('%Y-%m-%d %H:%m:%S'))
+
+now = time.strftime('%Y-%m-%d %H:%M:%S')
+print('启动时间：' + now)
 print("版本1.1 加入supervisor进程")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = Access_Token()
@@ -26,15 +28,15 @@ for i in user_list:
 print('总共%s名用户'%len(user_store))
 
 
-def refresh_list(id):
+def refresh_list(get_id):
     global today_list,hot_film,today_list_time,hot_film_time
-    if id == 1:
+    if get_id == 1:
         if time.time() - today_list_time > 1800:  # 每三十分钟更新一次招标信息
             today_list = sunshine_list()
             today_list_time = time.time()
             print('招标列表已更新')
     else:
-        if id == 2:
+        if get_id == 2:
             if time.time() - hot_film_time > 1800:  # 每三十分钟更新一次招标信息
                 hot_film = film_list()
                 hot_film_time = time.time()
