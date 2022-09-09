@@ -13,5 +13,5 @@ def film_list():
             filmlist.append(a)
         except:
             pass
-    print(filmlist)
+#    print(filmlist)
     return filmlist
