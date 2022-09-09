@@ -12,6 +12,6 @@ def film_list():
             a = i.text +' ' + i.a['href']
             filmlist.append(a)
         except:
-            break
+            pass
     print(filmlist)
     return filmlist

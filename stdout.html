@@ -1,0 +1,1793 @@
+/usr/local/bin/python3.10 /Users/liugang/Documents/GitHub/bit/searchtest.py
+<td class="search_title" colspan="6" height="35">查询条件</td>
+<td class="table_content_title" width="120px">公告名称：</td>
+<td align="left" width="260px"><input class="table_text" id="docTitle" name="docTitle" type="text" value=""/></td>
+<td class="table_content_title" width="120px">公告编码：</td>
+<td align="left" width="260px"><input class="table_text" id="docCode" name="docCode" type="text" value=""/></td>
+<td class="table_content_title" width="120px">省份：</td>
+<td align="left" width="260px">
+<span class="special_select">广西</span>
+<input class="special_select_hidden_text" id="provinceCode" name="provinceCode" type="hidden" value="10"/>
+<input class="special_select_hidden_text2" id="provinceNames" name="provinceNames" type="hidden" value="广西"/>
+<body>
+<!--特殊下拉浮动选择框-->
+<div class="special_select_float_bg"></div>
+<div class="special_select_float">
+<div class="relative_positioning">
+<span class="btn_close"><img border="0" src="/MSS-PORTAL/images/mss/v2/fast_operation_float_close.png"/></span>
+<div class="universal_two_content" style="border-bottom:0px;margin-top: 0px;width:1020px;">
+<table bgcolor="#e0e0e0" border="0" cellpadding="0" cellspacing="1" class="search_data" width="100%">
+<tr>
+<td class="search_title" height="35">电信主业公司</td>
+</tr>
+<tr>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">北京</span>
+<input id="pn" name="pn" type="hidden" value="01"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">上海</span>
+<input id="pn" name="pn" type="hidden" value="03"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">安徽</span>
+<input id="pn" name="pn" type="hidden" value="11"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">福建</span>
+<input id="pn" name="pn" type="hidden" value="22"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">甘肃</span>
+<input id="pn" name="pn" type="hidden" value="16"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">贵州</span>
+<input id="pn" name="pn" type="hidden" value="18"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">广东</span>
+<input id="pn" name="pn" type="hidden" value="09"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">广西</span>
+<input id="pn" name="pn" type="hidden" value="10"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">海南</span>
+<input id="pn" name="pn" type="hidden" value="08"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">湖北</span>
+<input id="pn" name="pn" type="hidden" value="06"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">湖南</span>
+<input id="pn" name="pn" type="hidden" value="05"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">江苏</span>
+<input id="pn" name="pn" type="hidden" value="04"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">江西</span>
+<input id="pn" name="pn" type="hidden" value="23"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">内蒙古</span>
+<input id="pn" name="pn" type="hidden" value="31"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">宁夏</span>
+<input id="pn" name="pn" type="hidden" value="17"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">青海</span>
+<input id="pn" name="pn" type="hidden" value="19"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">西藏</span>
+<input id="pn" name="pn" type="hidden" value="15"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">云南</span>
+<input id="pn" name="pn" type="hidden" value="14"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">浙江</span>
+<input id="pn" name="pn" type="hidden" value="02"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">四川</span>
+<input id="pn" name="pn" type="hidden" value="13"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">新疆</span>
+<input id="pn" name="pn" type="hidden" value="20"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">天津</span>
+<input id="pn" name="pn" type="hidden" value="21"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">河北</span>
+<input id="pn" name="pn" type="hidden" value="27"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">山西</span>
+<input id="pn" name="pn" type="hidden" value="28"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">河南</span>
+<input id="pn" name="pn" type="hidden" value="30"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">山东</span>
+<input id="pn" name="pn" type="hidden" value="29"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">黑龙江</span>
+<input id="pn" name="pn" type="hidden" value="24"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">辽宁</span>
+<input id="pn" name="pn" type="hidden" value="26"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">吉林</span>
+<input id="pn" name="pn" type="hidden" value="25"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">陕西</span>
+<input id="pn" name="pn" type="hidden" value="07"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">重庆</span>
+<input id="pn" name="pn" type="hidden" value="12"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">国际公司</span>
+<input id="pn" name="pn" type="hidden" value="54"/>
+</label>
+
+                	  
+                    </td>
+</tr>
+<tr>
+<td class="search_title" height="35">终端和集成公司</td>
+</tr>
+<tr>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司</span>
+<input id="pn" name="pn" type="hidden" value="34"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司北京分公司</span>
+<input id="pn" name="pn" type="hidden" value="EA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司浙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="EB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司上海分公司</span>
+<input id="pn" name="pn" type="hidden" value="EC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司江苏分公司</span>
+<input id="pn" name="pn" type="hidden" value="ED"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司湖南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司湖北分公司</span>
+<input id="pn" name="pn" type="hidden" value="EF"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司陕西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司海南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司广东分公司</span>
+<input id="pn" name="pn" type="hidden" value="EI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司广西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司安徽分公司</span>
+<input id="pn" name="pn" type="hidden" value="EK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司重庆分公司</span>
+<input id="pn" name="pn" type="hidden" value="EL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司四川分公司</span>
+<input id="pn" name="pn" type="hidden" value="EM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司云南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EN"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司西藏分公司</span>
+<input id="pn" name="pn" type="hidden" value="EO"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司甘肃分公司</span>
+<input id="pn" name="pn" type="hidden" value="EP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司宁夏分公司</span>
+<input id="pn" name="pn" type="hidden" value="EQ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司贵州分公司</span>
+<input id="pn" name="pn" type="hidden" value="ER"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司青海分公司</span>
+<input id="pn" name="pn" type="hidden" value="ES"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司新疆分公司</span>
+<input id="pn" name="pn" type="hidden" value="ET"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司天津分公司</span>
+<input id="pn" name="pn" type="hidden" value="EU"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司福建分公司</span>
+<input id="pn" name="pn" type="hidden" value="EV"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司江西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EW"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司黑龙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="EX"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司吉林分公司</span>
+<input id="pn" name="pn" type="hidden" value="EY"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司辽宁分公司</span>
+<input id="pn" name="pn" type="hidden" value="EZ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司河北分公司</span>
+<input id="pn" name="pn" type="hidden" value="RA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司山西分公司</span>
+<input id="pn" name="pn" type="hidden" value="RB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司山东分公司</span>
+<input id="pn" name="pn" type="hidden" value="RC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司河南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RD"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="RE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司济南区域中心</span>
+<input id="pn" name="pn" type="hidden" value="RG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司西安区域中心</span>
+<input id="pn" name="pn" type="hidden" value="RH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司本部</span>
+<input id="pn" name="pn" type="hidden" value="32"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司北京分公司</span>
+<input id="pn" name="pn" type="hidden" value="CA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司浙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="CB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司上海分公司</span>
+<input id="pn" name="pn" type="hidden" value="CC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司江苏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CD"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司湖南分公司</span>
+<input id="pn" name="pn" type="hidden" value="CE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司湖北分公司</span>
+<input id="pn" name="pn" type="hidden" value="CF"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司陕西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司海南分公司</span>
+<input id="pn" name="pn" type="hidden" value="CH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司广东分公司</span>
+<input id="pn" name="pn" type="hidden" value="CI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司广西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司安徽分公司</span>
+<input id="pn" name="pn" type="hidden" value="CK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司重庆分公司</span>
+<input id="pn" name="pn" type="hidden" value="CL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司四川分公司</span>
+<input id="pn" name="pn" type="hidden" value="CM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司云南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司西藏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CO"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司甘肃分公司</span>
+<input id="pn" name="pn" type="hidden" value="CP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司宁夏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CR"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司贵州分公司</span>
+<input id="pn" name="pn" type="hidden" value="CS"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司青海分公司</span>
+<input id="pn" name="pn" type="hidden" value="CT"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司新疆分公司</span>
+<input id="pn" name="pn" type="hidden" value="CU"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司天津分公司</span>
+<input id="pn" name="pn" type="hidden" value="CV"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司福建分公司</span>
+<input id="pn" name="pn" type="hidden" value="CW"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司江西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CX"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司黑龙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="CY"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司吉林分公司</span>
+<input id="pn" name="pn" type="hidden" value="CZ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司辽宁分公司</span>
+<input id="pn" name="pn" type="hidden" value="RI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司河北分公司</span>
+<input id="pn" name="pn" type="hidden" value="RJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司山西分公司</span>
+<input id="pn" name="pn" type="hidden" value="RK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司山东分公司</span>
+<input id="pn" name="pn" type="hidden" value="RL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司河南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="RN"/>
+</label>
+
+                	  
+                    </td>
+</tr>
+<tr>
+<td class="search_title" height="35">物联网、号百以及其他专业公司</td>
+</tr>
+<tr>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">物联网</span>
+<input id="pn" name="pn" type="hidden" value="60"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司</span>
+<input id="pn" name="pn" type="hidden" value="33"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司山东省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DA"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司黑龙江省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DB"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司吉林省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DC"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司辽宁省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DD"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司河北省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DE"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司山西省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DF"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司河南省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DG"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="DH"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信卫星通信公司</span>
+<input id="pn" name="pn" type="hidden" value="66"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼科技创业投资有限公司</span>
+<input id="pn" name="pn" type="hidden" value="53"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信集团黄页信息有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FA"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信集团投资有限公司</span>
+<input id="pn" name="pn" type="hidden" value="65"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼资本控股有限公司</span>
+<input id="pn" name="pn" type="hidden" value="67"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">广东亿迅科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FB"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">世纪龙</span>
+<input id="pn" name="pn" type="hidden" value="FC"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">广州云康信息科技</span>
+<input id="pn" name="pn" type="hidden" value="FD"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">福富公司</span>
+<input id="pn" name="pn" type="hidden" value="FF"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">福建讯盟软件有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FE"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼爱音乐文化科技</span>
+<input id="pn" name="pn" type="hidden" value="42"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">兰州乐智教育科技</span>
+<input id="pn" name="pn" type="hidden" value="62"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">上海理想信息产业(集团)</span>
+<input id="pn" name="pn" type="hidden" value="FG"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">杭州天翼智慧城市科技</span>
+<input id="pn" name="pn" type="hidden" value="61"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">集团财务有限公司</span>
+<input id="pn" name="pn" type="hidden" value="68"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧家庭科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="69"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">物联科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="70"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">京津冀大数据</span>
+<input id="pn" name="pn" type="hidden" value="72"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼融资租赁有限公司</span>
+<input id="pn" name="pn" type="hidden" value="73"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">电信数字化能力中心</span>
+<input id="pn" name="pn" type="hidden" value="71"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">京津冀大数据产业园分公司</span>
+<input id="pn" name="pn" type="hidden" value="78"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云高阳建设中心</span>
+<input id="pn" name="pn" type="hidden" value="74"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云怀来建设中心</span>
+<input id="pn" name="pn" type="hidden" value="75"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云张北建设中心</span>
+<input id="pn" name="pn" type="hidden" value="76"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">数字生活公司</span>
+<input id="pn" name="pn" type="hidden" value="79"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中电宁夏智能</span>
+<input id="pn" name="pn" type="hidden" value="VX"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">互金公司</span>
+<input id="pn" name="pn" type="hidden" value="HJ"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">云堤公司</span>
+<input id="pn" name="pn" type="hidden" value="77"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">��������������������������</span>
+<input id="pn" name="pn" type="hidden" value="VY"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智能网络</span>
+<input id="pn" name="pn" type="hidden" value="VY"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">上海理想信息产业（集团）有限公司数智吉成数字技术分公司</span>
+<input id="pn" name="pn" type="hidden" value="FH"/>
+</label>
+
+                	  
+                    </td>
+</tr>
+</table>
+</div>
+</div>
+</div></body>
+</td>
+<td class="search_title" height="35">电信主业公司</td>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">北京</span>
+<input id="pn" name="pn" type="hidden" value="01"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">上海</span>
+<input id="pn" name="pn" type="hidden" value="03"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">安徽</span>
+<input id="pn" name="pn" type="hidden" value="11"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">福建</span>
+<input id="pn" name="pn" type="hidden" value="22"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">甘肃</span>
+<input id="pn" name="pn" type="hidden" value="16"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">贵州</span>
+<input id="pn" name="pn" type="hidden" value="18"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">广东</span>
+<input id="pn" name="pn" type="hidden" value="09"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">广西</span>
+<input id="pn" name="pn" type="hidden" value="10"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">海南</span>
+<input id="pn" name="pn" type="hidden" value="08"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">湖北</span>
+<input id="pn" name="pn" type="hidden" value="06"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">湖南</span>
+<input id="pn" name="pn" type="hidden" value="05"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">江苏</span>
+<input id="pn" name="pn" type="hidden" value="04"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">江西</span>
+<input id="pn" name="pn" type="hidden" value="23"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">内蒙古</span>
+<input id="pn" name="pn" type="hidden" value="31"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">宁夏</span>
+<input id="pn" name="pn" type="hidden" value="17"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">青海</span>
+<input id="pn" name="pn" type="hidden" value="19"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">西藏</span>
+<input id="pn" name="pn" type="hidden" value="15"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">云南</span>
+<input id="pn" name="pn" type="hidden" value="14"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">浙江</span>
+<input id="pn" name="pn" type="hidden" value="02"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">四川</span>
+<input id="pn" name="pn" type="hidden" value="13"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">新疆</span>
+<input id="pn" name="pn" type="hidden" value="20"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">天津</span>
+<input id="pn" name="pn" type="hidden" value="21"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">河北</span>
+<input id="pn" name="pn" type="hidden" value="27"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">山西</span>
+<input id="pn" name="pn" type="hidden" value="28"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">河南</span>
+<input id="pn" name="pn" type="hidden" value="30"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">山东</span>
+<input id="pn" name="pn" type="hidden" value="29"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">黑龙江</span>
+<input id="pn" name="pn" type="hidden" value="24"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">辽宁</span>
+<input id="pn" name="pn" type="hidden" value="26"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">吉林</span>
+<input id="pn" name="pn" type="hidden" value="25"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">陕西</span>
+<input id="pn" name="pn" type="hidden" value="07"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">重庆</span>
+<input id="pn" name="pn" type="hidden" value="12"/>
+</label>
+<label class="special_radio special_radio_width1">
+<span class="change_state"></span>
+<span class="text">国际公司</span>
+<input id="pn" name="pn" type="hidden" value="54"/>
+</label>
+
+                	  
+                    </td>
+<td class="search_title" height="35">终端和集成公司</td>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司</span>
+<input id="pn" name="pn" type="hidden" value="34"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司北京分公司</span>
+<input id="pn" name="pn" type="hidden" value="EA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司浙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="EB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司上海分公司</span>
+<input id="pn" name="pn" type="hidden" value="EC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司江苏分公司</span>
+<input id="pn" name="pn" type="hidden" value="ED"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司湖南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司湖北分公司</span>
+<input id="pn" name="pn" type="hidden" value="EF"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司陕西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司海南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司广东分公司</span>
+<input id="pn" name="pn" type="hidden" value="EI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司广西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司安徽分公司</span>
+<input id="pn" name="pn" type="hidden" value="EK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司重庆分公司</span>
+<input id="pn" name="pn" type="hidden" value="EL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司四川分公司</span>
+<input id="pn" name="pn" type="hidden" value="EM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司云南分公司</span>
+<input id="pn" name="pn" type="hidden" value="EN"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司西藏分公司</span>
+<input id="pn" name="pn" type="hidden" value="EO"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司甘肃分公司</span>
+<input id="pn" name="pn" type="hidden" value="EP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司宁夏分公司</span>
+<input id="pn" name="pn" type="hidden" value="EQ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司贵州分公司</span>
+<input id="pn" name="pn" type="hidden" value="ER"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司青海分公司</span>
+<input id="pn" name="pn" type="hidden" value="ES"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司新疆分公司</span>
+<input id="pn" name="pn" type="hidden" value="ET"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司天津分公司</span>
+<input id="pn" name="pn" type="hidden" value="EU"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司福建分公司</span>
+<input id="pn" name="pn" type="hidden" value="EV"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司江西分公司</span>
+<input id="pn" name="pn" type="hidden" value="EW"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司黑龙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="EX"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司吉林分公司</span>
+<input id="pn" name="pn" type="hidden" value="EY"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司辽宁分公司</span>
+<input id="pn" name="pn" type="hidden" value="EZ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司河北分公司</span>
+<input id="pn" name="pn" type="hidden" value="RA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司山西分公司</span>
+<input id="pn" name="pn" type="hidden" value="RB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司山东分公司</span>
+<input id="pn" name="pn" type="hidden" value="RC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司河南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RD"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="RE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司济南区域中心</span>
+<input id="pn" name="pn" type="hidden" value="RG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">中国电信集团系统集成有限责任公司西安区域中心</span>
+<input id="pn" name="pn" type="hidden" value="RH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司本部</span>
+<input id="pn" name="pn" type="hidden" value="32"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司北京分公司</span>
+<input id="pn" name="pn" type="hidden" value="CA"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司浙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="CB"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司上海分公司</span>
+<input id="pn" name="pn" type="hidden" value="CC"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司江苏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CD"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司湖南分公司</span>
+<input id="pn" name="pn" type="hidden" value="CE"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司湖北分公司</span>
+<input id="pn" name="pn" type="hidden" value="CF"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司陕西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CG"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司海南分公司</span>
+<input id="pn" name="pn" type="hidden" value="CH"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司广东分公司</span>
+<input id="pn" name="pn" type="hidden" value="CI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司广西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司安徽分公司</span>
+<input id="pn" name="pn" type="hidden" value="CK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司重庆分公司</span>
+<input id="pn" name="pn" type="hidden" value="CL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司四川分公司</span>
+<input id="pn" name="pn" type="hidden" value="CM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司云南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司西藏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CO"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司甘肃分公司</span>
+<input id="pn" name="pn" type="hidden" value="CP"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司宁夏分公司</span>
+<input id="pn" name="pn" type="hidden" value="CR"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司贵州分公司</span>
+<input id="pn" name="pn" type="hidden" value="CS"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司青海分公司</span>
+<input id="pn" name="pn" type="hidden" value="CT"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司新疆分公司</span>
+<input id="pn" name="pn" type="hidden" value="CU"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司天津分公司</span>
+<input id="pn" name="pn" type="hidden" value="CV"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司福建分公司</span>
+<input id="pn" name="pn" type="hidden" value="CW"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司江西分公司</span>
+<input id="pn" name="pn" type="hidden" value="CX"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司黑龙江分公司</span>
+<input id="pn" name="pn" type="hidden" value="CY"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司吉林分公司</span>
+<input id="pn" name="pn" type="hidden" value="CZ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司辽宁分公司</span>
+<input id="pn" name="pn" type="hidden" value="RI"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司河北分公司</span>
+<input id="pn" name="pn" type="hidden" value="RJ"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司山西分公司</span>
+<input id="pn" name="pn" type="hidden" value="RK"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司山东分公司</span>
+<input id="pn" name="pn" type="hidden" value="RL"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司河南分公司</span>
+<input id="pn" name="pn" type="hidden" value="RM"/>
+</label>
+<label class="special_radio special_radio_width2">
+<span class="change_state"></span>
+<span class="text">天翼电信终端有限公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="RN"/>
+</label>
+
+                	  
+                    </td>
+<td class="search_title" height="35">物联网、号百以及其他专业公司</td>
+<td style="padding-top:10px; padding-bottom:10px;">
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">物联网</span>
+<input id="pn" name="pn" type="hidden" value="60"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司</span>
+<input id="pn" name="pn" type="hidden" value="33"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司山东省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DA"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司黑龙江省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DB"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司吉林省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DC"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司辽宁省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DD"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司河北省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DE"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司山西省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DF"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司河南省分公司</span>
+<input id="pn" name="pn" type="hidden" value="DG"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">号百信息服务有限公司内蒙古分公司</span>
+<input id="pn" name="pn" type="hidden" value="DH"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信卫星通信公司</span>
+<input id="pn" name="pn" type="hidden" value="66"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼科技创业投资有限公司</span>
+<input id="pn" name="pn" type="hidden" value="53"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信集团黄页信息有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FA"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中国电信集团投资有限公司</span>
+<input id="pn" name="pn" type="hidden" value="65"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼资本控股有限公司</span>
+<input id="pn" name="pn" type="hidden" value="67"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">广东亿迅科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FB"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">世纪龙</span>
+<input id="pn" name="pn" type="hidden" value="FC"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">广州云康信息科技</span>
+<input id="pn" name="pn" type="hidden" value="FD"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">福富公司</span>
+<input id="pn" name="pn" type="hidden" value="FF"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">福建讯盟软件有限公司</span>
+<input id="pn" name="pn" type="hidden" value="FE"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼爱音乐文化科技</span>
+<input id="pn" name="pn" type="hidden" value="42"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">兰州乐智教育科技</span>
+<input id="pn" name="pn" type="hidden" value="62"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">上海理想信息产业(集团)</span>
+<input id="pn" name="pn" type="hidden" value="FG"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">杭州天翼智慧城市科技</span>
+<input id="pn" name="pn" type="hidden" value="61"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">集团财务有限公司</span>
+<input id="pn" name="pn" type="hidden" value="68"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧家庭科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="69"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">物联科技有限公司</span>
+<input id="pn" name="pn" type="hidden" value="70"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">京津冀大数据</span>
+<input id="pn" name="pn" type="hidden" value="72"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">天翼融资租赁有限公司</span>
+<input id="pn" name="pn" type="hidden" value="73"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">电信数字化能力中心</span>
+<input id="pn" name="pn" type="hidden" value="71"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">京津冀大数据产业园分公司</span>
+<input id="pn" name="pn" type="hidden" value="78"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云高阳建设中心</span>
+<input id="pn" name="pn" type="hidden" value="74"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云怀来建设中心</span>
+<input id="pn" name="pn" type="hidden" value="75"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智慧云张北建设中心</span>
+<input id="pn" name="pn" type="hidden" value="76"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">数字生活公司</span>
+<input id="pn" name="pn" type="hidden" value="79"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">中电宁夏智能</span>
+<input id="pn" name="pn" type="hidden" value="VX"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">互金公司</span>
+<input id="pn" name="pn" type="hidden" value="HJ"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">云堤公司</span>
+<input id="pn" name="pn" type="hidden" value="77"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">��������������������������</span>
+<input id="pn" name="pn" type="hidden" value="VY"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">智能网络</span>
+<input id="pn" name="pn" type="hidden" value="VY"/>
+</label>
+<label class="special_radio special_radio_width3">
+<span class="change_state"></span>
+<span class="text">上海理想信息产业（集团）有限公司数智吉成数字技术分公司</span>
+<input id="pn" name="pn" type="hidden" value="FH"/>
+</label>
+
+                	  
+                    </td>
+<td class="table_content_title" width="120px">创建开始日期：</td>
+<td align="left" width="260px"><input class="table_text" id="startDate" name="startDate" onfocus=";WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" type="text" value=""/></td>
+<td class="table_content_title" width="120px">创建结束日期：</td>
+<td align="left" width="260px"><input class="table_text" id="endDate" name="endDate" onfocus=";WdatePicker({skin:'whyGreen',dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" type="text" value=""/></td>
+<td class="table_content_title" width="120px">公告类型</td>
+<td align="left" width="260px"><select id="docType" name="docType" style="select"><option value="">请选择</option><option value="TenderAnnouncement">招标公告</option><option value="PurchaseAnnounceBasic">单一来源采购公告</option><option value="CompareSelect">比选公告</option><option value="Enquiry">询价公告</option><option value="NegotiationSelect">竞争性谈判文件</option></select></td>
+<td class="search_button" colspan="6">
+<input class="btn1" onclick="query();" type="button" value="查 询"/>
+<input class="btn2" onclick="clean();" type="button" value="清 除"/>
+<input class="btn2" onclick="window.close();" type="button" value="关闭"/>
+</td>
+<td align="center" bgcolor="#EEEEEE" width="30%"> </td>
+<td align="center" bgcolor="#EEEEEE" width="11%">
+<select id="pageNum" name="pageNum" onchange="changePageSize(this);" style="width: 55px; height:20px;">
+<option value="5">5条</option>
+<option selected="" value="10">10条</option>
+<option value="20">20条</option>
+<option value="30">30条</option>
+<option value="40">40条</option>
+</select>
+</td>
+<td align="center" bgcolor="#EEEEEE" width="1%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="7%">
+<img height="16" src="/MSS-PORTAL/images/mss/resultset_first_f.png" width="16"/>
+<img height="16" src="/MSS-PORTAL/images/mss/resultset_previous_f.png" width="16"/>
+</td>
+<td align="center" bgcolor="#EEEEEE" width="1%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="17%">
+<input align="middle" id="goPageNum" maxlength="3" name="goPageNum" size="2" style="vertical-align: middle; text-align: center" value="1">
+<a href="#" onclick="toPagerSubmit(10);return false;">
+<img height="20" src="/MSS-PORTAL/images/mss/go_btn.jpg" width="35"/></a>
+</input></td>
+<td align="center" bgcolor="#EEEEEE" width="10%">当前第 1 页</td>
+<td align="center" bgcolor="#EEEEEE" width="10%">共有83条信息 </td>
+<td align="center" bgcolor="#EEEEEE" width="0%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="7%">
+<a href="#" onclick="pagerSubmit(11);return false;"><img border="0" height="16" src="/MSS-PORTAL/images/mss/resultset_next.png" width="16"/></a>
+<a href="#" onclick="pagerSubmit(81);return false;"><img border="0" height="16" src="/MSS-PORTAL/images/mss/resultset_last.png" width="16"/></a>
+</td>
+<td height="35px" nowrap="">省份</td>
+<td height="35px" nowrap="">终止</td>
+<td height="35px" nowrap="">公告名称</td>
+<td height="35px" nowrap="">公告编码</td>
+<td height="35px" nowrap="">公告类型</td>
+<td height="35px" nowrap="">创建时间日期</td>
+<td height="35px" nowrap="">开始时间</td>
+<td height="35px" nowrap="">截止时间</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('5545222','cstldbkutGI=1m45yFrWhsTjmePEQQUJkw==','61e437719ad310e1aaac71abaa8abb64')">2022年中国电信南宁分公司A、B类机房自动气体灭火系统建设项目比选公告</a></td>
+<td>GXBXWJ20220909003</td>
+<td>
+
+
+
+
+							   	比选公告
+
+
+
+
+
+						</td>
+<td>2022-09-09 11:42:11 </td>
+<td>2022-09-13 08:30:00</td>
+<td>2022-09-15 18:00:00</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('439701','cstldbkutGI=RXEqoLMtUjYlT4tAMVqMf49Ae9B3wOpF','15a07daf2ad0e52a0de580a6a96f5ce0')">2022-2024年来宾分公司办公室公务用房租赁单一来源采购公示</a></td>
+<td>GXDYLYCGGS2022090904</td>
+<td>
+
+
+
+							   	单一来源采购公示
+
+
+
+
+
+
+						</td>
+<td>2022-09-09 11:14:27 </td>
+<td>2022-09-09 11:09:37</td>
+<td>2022-09-15 11:09:39</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('439699','cstldbkutGI=RXEqoLMtUjYlT4tAMVqMf49Ae9B3wOpF','a6b83e98791c36c42213fd223d842376')">中国电信南宁分公司2022年广西铁塔网络安全加固项目安全技术服务采购项目单一来源采购公示</a></td>
+<td>GXDYLYCGGS2022090903</td>
+<td>
+
+
+
+							   	单一来源采购公示
+
+
+
+
+
+
+						</td>
+<td>2022-09-09 11:12:02 </td>
+<td>2022-09-13 08:30:00</td>
+<td>2022-09-15 18:00:00</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('439685','cstldbkutGI=RXEqoLMtUjYlT4tAMVqMf49Ae9B3wOpF','70746c12ba66e50231945da9916d8178')">2022年贺州桂岭竹园油榨坪寨和瑶田寨（普）基站用电项目单一来源采购公示</a></td>
+<td>GXDYLYCGGS2022090902</td>
+<td>
+
+
+
+							   	单一来源采购公示
+
+
+
+
+
+
+						</td>
+<td>2022-09-09 10:30:32 </td>
+<td>2022-09-13 08:00:00</td>
+<td>2022-09-19 08:00:00</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('5545209','cstldbkutGI=1m45yFrWhsTjmePEQQUJkw==','4eb5a5f2a6c4bbc22907fae278f6de8b')">中国电信北海分公司2022-2023年客户端装移机外包服务采购项目比选公告</a></td>
+<td>GXBXWJ20220909001</td>
+<td>
+
+
+
+
+							   	比选公告
+
+
+
+
+
+						</td>
+<td>2022-09-09 10:29:17 </td>
+<td>2022-09-10 08:30:00</td>
+<td>2022-09-13 18:00:00</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('5545197','cstldbkutGI=1m45yFrWhsTjmePEQQUJkw==','24307cc16b2081b05bf4e476243534d3')">2022年龙州县人民政府办公室电子政务外网运维服务部分设备更换采购</a></td>
+<td>GXBXWJ20220908004</td>
+<td>
+
+
+
+
+							   	比选公告
+
+
+
+
+
+						</td>
+<td>2022-09-09 09:38:06 </td>
+<td>2022-09-09 08:30:00</td>
+<td>2022-09-13 15:30:00</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('439640','cstldbkutGI=RXEqoLMtUjYlT4tAMVqMf49Ae9B3wOpF','1ac6643a45afd7711722a7c367b8c4ef')">2022年环江家广福商贸有限公司做为环江分公司业务用品采购供应商的公示</a></td>
+<td>GXDYLYCGGS2022090815</td>
+<td>
+
+
+
+							   	单一来源采购公示
+
+
+
+
+
+
+						</td>
+<td>2022-09-08 18:27:00 </td>
+<td>2022-09-09 18:16:45</td>
+<td>2022-09-14 18:16:52</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('5545171','cstldbkutGI=1m45yFrWhsTjmePEQQUJkw==','da428bc9ea669c1cd6df9fbb5dca7c15')">2022年中国电信桂林分公司临桂区执法记录仪设备采购项目比选公告</a></td>
+<td>GXBXWJ20220908003</td>
+<td>
+
+
+
+
+							   	比选公告
+
+
+
+
+
+						</td>
+<td>2022-09-08 17:56:46 </td>
+<td>2022-09-09 08:30:54</td>
+<td>2022-09-14 18:00:12</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('439592','cstldbkutGI=RXEqoLMtUjYlT4tAMVqMf49Ae9B3wOpF','bff984fcd522cf0596d7eb4b7c6b530e')">琴潭组团B6地块5栋1层9-12号门面租赁项目</a></td>
+<td>GXDYLYCGGS2022090812</td>
+<td>
+
+
+
+							   	单一来源采购公示
+
+
+
+
+
+
+						</td>
+<td>2022-09-08 17:12:10 </td>
+<td>2022-09-09 16:08:23</td>
+<td>2022-09-14 16:08:34</td>
+<td>广西</td>
+<td>
+
+
+
+
+
+否
+</td>
+<td><a href="#" onclick="view('5545118','cstldbkutGI=4dPqBw7iyVv3DLQAjIK+PMpr8Qzu0k7Y','d06527c01d983cafe7b202e8f955251a')">2022年-2023年中国电信广西信产公司综合类技术服务支撑项目招标公告</a></td>
+<td>GXZBGG20220908001</td>
+<td>
+
+
+							   	招标公告
+
+
+
+
+
+
+
+						</td>
+<td>2022-09-08 17:00:54 </td>
+<td>2022-09-09 08:30:00</td>
+<td>2022-09-16 18:00:00</td>
+<td align="center" bgcolor="#EEEEEE" width="30%"> </td>
+<td align="center" bgcolor="#EEEEEE" width="11%">
+<select id="pageNum" name="pageNum" onchange="changePageSize(this);" style="width: 55px; height:20px;">
+<option value="5">5条</option>
+<option selected="" value="10">10条</option>
+<option value="20">20条</option>
+<option value="30">30条</option>
+<option value="40">40条</option>
+</select>
+</td>
+<td align="center" bgcolor="#EEEEEE" width="1%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="7%">
+<img height="16" src="/MSS-PORTAL/images/mss/resultset_first_f.png" width="16"/>
+<img height="16" src="/MSS-PORTAL/images/mss/resultset_previous_f.png" width="16"/>
+</td>
+<td align="center" bgcolor="#EEEEEE" width="1%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="17%">
+<input align="middle" id="goPageNum" maxlength="3" name="goPageNum" size="2" style="vertical-align: middle; text-align: center" value="1">
+<a href="#" onclick="toPagerSubmit(10);return false;">
+<img height="20" src="/MSS-PORTAL/images/mss/go_btn.jpg" width="35"/></a>
+</input></td>
+<td align="center" bgcolor="#EEEEEE" width="10%">当前第 1 页</td>
+<td align="center" bgcolor="#EEEEEE" width="10%">共有83条信息 </td>
+<td align="center" bgcolor="#EEEEEE" width="0%"><img height="23" src="/MSS-PORTAL/images/mss/images31.gif" width="2"/></td>
+<td align="center" bgcolor="#EEEEEE" width="7%">
+<a href="#" onclick="pagerSubmit(11);return false;"><img border="0" height="16" src="/MSS-PORTAL/images/mss/resultset_next.png" width="16"/></a>
+<a href="#" onclick="pagerSubmit(81);return false;"><img border="0" height="16" src="/MSS-PORTAL/images/mss/resultset_last.png" width="16"/></a>
+</td>
+
+进程已结束,退出代码0

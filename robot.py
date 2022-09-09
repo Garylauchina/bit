@@ -21,13 +21,12 @@ for i in user_list:
     user_label['film_send'] = 0
     user_store.append(user_label.copy())
 print(user_store)
-def refresh_list(get_list):
-    global today_list_time
-    if time.time() - today_list_time > 1800:    #每三十分钟更新一次招标信息
-        get_list = sunshine_list()
-        today_list_time = time.time()
+def refresh_list(get_time):
+    global today_list
+    if time.time() - get_time > 1800:    #每三十分钟更新一次招标信息
+        today_list = sunshine_list()
         print('列表已更新')
-    return get_list
+    return get_time
 
 def refresh_token():
     global access_token
@@ -43,8 +42,9 @@ def refresh_token():
 
 @robot.handler
 def echo(msg):
+    global today_list_time
     refresh_token()
-    refresh_list(today_list)
+    today_list_time = refresh_list(today_list_time)
     print(msg.source)
     if msg.content == '1':
         for j in user_store:  # 遍历user_store

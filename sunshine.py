@@ -38,7 +38,7 @@ def sunshine_list():
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
     bit_list = []
     today = int(time.strftime('%Y%m%d', time.localtime()))
-    force_end = False
+    HasNextPage = True
     headers = {
         'Accept': 'application/json,text/plain,*/*',
         'Accept-Encoding': 'gzip,deflate,br',
@@ -67,43 +67,22 @@ def sunshine_list():
         'title': "",
         'type': "0"
     }
-    while not force_end:
+    while HasNextPage:
         r = requests.post(url, json=data, headers=headers)
-        r = r.json()['data']['list']
-#        pprint(r)
-        for i in range(len(r)):
-            if today == int(r[i]['createDate'].replace('-', '')[0:8]):  # 判断发布时间是否当天
-                bit_list.append(r[i])
+        r = r.json()['data']
+        HasNextPage = r['hasNextPage']
+        for i in r['list']:
+            if today == int(i['createDate'][0:10].replace('-', '')):  # 判断发布时间是否当天
+                bit_list.append(i)
             else:
-                force_end = True
-        if force_end:
-            break
-        else:
-            data['pageNum'] = data['pageNum'] + 1
+                HasNextPage = False
+        data['pageNum'] = data['pageNum'] + 1
     return bit_list
+# k = sunshine_list()
+# print(len(k))
+# for i in k:
+#     print(i)
 
-
-def cm_list():
-    url = 'https://b2b.10086.cn/b2b/supplier/b2bStyle/js/jquery.min.js'
-
-    headers={
-        'Accept':'*/*Accept-Encoding:gzip,deflate,br',
-        'Accept-Language':'zh-CN,zh;q=0.9',
-        'Cache-Control':'no-cache',
-        'Connection':'keep-alive',
-        'Cookie':'JSESSIONID=DF87C9F0D02A958FDCC3403147257AA7',
-        'Host':'b2b.10086.cn',
-        'Pragma':'no-cache',
-        'Referer':'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2',
-        'sec-ch-ua':'"GoogleChrome";v="105","Not)A;Brand";v="8","Chromium";v="105"',
-        'sec-ch-ua-mobile':'?0',
-        'sec-ch-ua-platform':'"macOS"',
-        'Sec-Fetch-Dest':'script',
-        'Sec-Fetch-Mode':'no-cors',
-        'Sec-Fetch-Site':'same-origin',
-        'User-Agent':'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,likeGecko)Chrome/105.0.0.0Safari/537.36',
-        }
-    return
 
 
 # 向微信公众号发送消息
