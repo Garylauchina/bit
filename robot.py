@@ -93,7 +93,8 @@ def echo(msg):
 def welcome(msg):
     global today_list_time
     refresh_token()
-    today_list_time = refresh_list(today_list_time)
+    refresh_list(1)
+    refresh_list(2)
     user_list.append(msg.source)
     user_label['openid'] = msg.source
     user_label['last_send'] = 0
