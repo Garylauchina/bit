@@ -1,14 +1,18 @@
 import time
-import copy
 import requests
 import json
-from pprint import pprint
 
 argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
 argu3 = '6bf950052b38e94da3259b5a4bc11e12'
 base_url = 'https://api.weixin.qq.com/cgi-bin'
 test_id = 'o-4JI0ibLP9genCK8KVGz_KKkWWE'  # 刘刚的openid
+
+
+def add_user(get_store, get_id):
+    user_label = {'openid': get_id, 'last_send': 0, 'film_send': 0}
+    get_store.append(user_label.copy())
+    return get_store
 
 
 def all_user(get_token):
@@ -23,7 +27,7 @@ def all_user(get_token):
     return a
 
 
-def Access_Token():
+def new_token():
     token_url = '/token?grant_type=%s&appid=%s&secret=%s' % (argu1, argu2, argu3)
     #
     #    id_info_url = '/user/info?access_token=%s&openid=%s&lang=zh_CN'
@@ -78,11 +82,24 @@ def sunshine_list():
                 hasnextpage = False
         data['pageNum'] = data['pageNum'] + 1
     return bit_list
+
+
+# def cal_html(get_bit_dict):
+#     html_1 = 'https://caigou.chinatelecom.com.cn/ctsc-portal'
+#     bit_type = {
+#         '采购结果公示': '/Nopublicity/jieguoDetail/412290',
+#         '比选公告': '/notLoglPublicAnnouncement/detail/5545213?id=5545213&user_collection',
+#         '单一来源采购公告': '',
+#         '询价公告': '',
+#         '招标公告': '',
+#     }
+#     return
+
+
 # k = sunshine_list()
 # print(len(k))
 # for i in k:
 #     print(i)
-
 
 
 # 向微信公众号发送消息
@@ -94,16 +111,3 @@ def send_msg(get_message, get_user, get_token):
     msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
     requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
     return
-
-
-'''
-def send_sunshine(page,get_id):
-    get_list = sunshine_list(page)  # 获取第一页，字典格式
-    send_list = []
-    for i in get_list:
-        send_list.append(i['docTitle'] + '\n' + i['docType'])
-    for i in send_list:
-        print(i)
-        send_msg(i, get_id)
-    return
-'''

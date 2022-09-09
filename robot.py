@@ -7,7 +7,7 @@ now = time.strftime('%Y-%m-%d %H:%M:%S')
 print('启动时间：' + now)
 print("版本1.2 通过git更新后，supervisor中重启服务")
 robot = werobot.WeRoBot(token='Dcbpes2098')
-access_token = Access_Token()
+access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
 
@@ -20,10 +20,7 @@ today_list_time = time.time()  # 上次招标信息更新的时间
 hot_film_time = time.time()
 print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
-    user_label['openid'] = i
-    user_label['last_send'] = 0
-    user_label['film_send'] = 0
-    user_store.append(user_label.copy())
+    add_user(user_store,i)
 print('总共%s名用户' % len(user_store))
 
 
@@ -46,13 +43,12 @@ def refresh_list(get_id):
 def refresh_token():
     global access_token, token_time
     if int(time.time()) - token_time >= 3600:
-        access_token = Access_Token()
+        access_token = new_token()
         token_time = int(time.time())
         print('token已刷新，有效时间7200秒')
     else:
         print('token未过期，有效时间%s秒' % (7200 - (int(time.time()) - token_time)))
     return
-
 
 
 @robot.handler
@@ -98,15 +94,12 @@ def echo(msg):
 
 @robot.subscribe
 def welcome(msg):
-    global today_list_time, user_list, user_store
-    user_i = {}
+    global access_token, user_list, user_store
     refresh_token()
     refresh_list(1)
     refresh_list(2)
-    user_list.append(msg.source)
-    user_i['openid'] = msg.source
-    user_i['last_send'] = 0
-    user_store.append(user_label.copy())
+    user_list = all_user(access_token)
+    add_user(user_store, msg.source)
     return '1---电信招标网（阳光）\n 2---热门影视'
 
 
