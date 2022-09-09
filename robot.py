@@ -63,13 +63,13 @@ def send_all(get_list,get_id):
             if len(get_list) - j['last_send'] > 10:  # 如果存在未发数据
                 wait_to_send = get_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多3条并发送
                 for k in wait_to_send:
-                    send_msg(k['docTitle'], get_id, access_token)
+                    send_msg(k, get_id, access_token)
                 j['last_send'] += 10  # 发送完成，更新用户的发送标记
                 return "还有%s条" % (len(get_list) - j['last_send'])
             else:
                 wait_to_send = get_list[j['last_send']::]
                 for k in wait_to_send:
-                    send_msg(k['docTitle'], get_id, access_token)
+                    send_msg(k, get_id, access_token)
                 j['last_send'] = 0  # 发送完成，清除标记
     return
 

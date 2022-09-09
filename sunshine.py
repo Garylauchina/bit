@@ -38,7 +38,7 @@ def sunshine_list():
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
     bit_list = []
     today = int(time.strftime('%Y%m%d', time.localtime()))
-    HasNextPage = True
+    hasnextpage = True
     headers = {
         'Accept': 'application/json,text/plain,*/*',
         'Accept-Encoding': 'gzip,deflate,br',
@@ -67,15 +67,15 @@ def sunshine_list():
         'title': "",
         'type': "0"
     }
-    while HasNextPage:
+    while hasnextpage:
         r = requests.post(url, json=data, headers=headers)
         r = r.json()['data']
-        HasNextPage = r['hasNextPage']
+        hasnextpage = r['hasNextPage']
         for i in r['list']:
             if today == int(i['createDate'][0:10].replace('-', '')):  # 判断发布时间是否当天
-                bit_list.append(i)
+                bit_list.append(i['docTitle'])
             else:
-                HasNextPage = False
+                hasnextpage = False
         data['pageNum'] = data['pageNum'] + 1
     return bit_list
 # k = sunshine_list()
