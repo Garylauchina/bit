@@ -54,23 +54,6 @@ def refresh_token():
     return
 
 
-def send_all(get_list, get_id):
-    global user_store, access_token
-    for j in user_store:  # 遍历user_store
-        if j['openid'] == get_id:
-            if len(get_list) - j['last_send'] > 10:  # 如果存在未发数据
-                wait_to_send = get_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多10条并发送
-                for k in wait_to_send:
-                    send_msg(k, get_id, access_token)
-                j['last_send'] += 10  # 发送完成，更新用户的发送标记
-                return "还有%s条" % (len(get_list) - j['last_send'])
-            else:
-                wait_to_send = get_list[j['last_send']::]
-                for k in wait_to_send:
-                    send_msg(k, get_id, access_token)
-                j['last_send'] = 0  # 发送完成，清除标记
-    return
-
 
 @robot.handler
 def echo(msg):
@@ -79,13 +62,37 @@ def echo(msg):
     print(msg.source)
     if msg.content == '1':
         refresh_list(1)
-        send_all(today_list, msg.source)
-        return '发送完毕'
+        for j in user_store:  # 遍历user_store
+            if j['openid'] == msg.source:
+                if len(today_list) - j['last_send'] > 10:  # 如果存在未发数据
+                    wait_to_send = today_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多10条并发送
+                    for k in wait_to_send:
+                        send_msg(k, msg.source, access_token)
+                    j['last_send'] += 10  # 发送完成，更新用户的发送标记
+                    return "还有%s条" % (len(today_list) - j['last_send'])
+                else:
+                    wait_to_send = today_list[j['last_send']::]
+                    for k in wait_to_send:
+                        send_msg(k, msg.source, access_token)
+                    j['last_send'] = 0  # 发送完成，清除标记
+                    return '发送完毕'
     else:
         if msg.content == '2':
             refresh_list(2)
-            send_all(hot_film, msg.source)
-            return '发送完毕'
+            for j in user_store:  # 遍历user_store
+                if j['openid'] == msg.source:
+                    if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
+                        wait_to_send = hot_film[j['film_send']:j['film_send'] + 10]  # 则切片最多最多10条并发送
+                        for k in wait_to_send:
+                            send_msg(k, msg.source, access_token)
+                        j['film_send'] += 10  # 发送完成，更新用户的发送标记
+                        return "还有%s条" % (len(hot_film) - j['film_send'])
+                    else:
+                        wait_to_send = hot_film[j['film_send']::]
+                        for k in wait_to_send:
+                            send_msg(k, msg.source, access_token)
+                        j['film_send'] = 0  # 发送完成，清除标记
+                        return '发送完毕'
     return '1---电信招标网（阳光）\n 2---热门影视'
 
 
