@@ -57,24 +57,23 @@ def refresh_token():
 def send_all(get_list,get_id):
     global user_store,access_token
     for j in user_store:  # 遍历user_store
-        if j['openid'] == get_id:  # 检索库中的用户id
-            if len(get_list) - j['last_send'] > 10:  # 如果存在未发数据
+        if j['openid'] == get_id:
+            if len(get_list) - j[get_id]['last_send'] > 10:  # 如果存在未发数据
                 wait_to_send = get_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多3条并发送
-                for k in range(len(wait_to_send)):
-                    send_msg(wait_to_send[k]['docTitle'], get_id, access_token)
+                for k in wait_to_send:
+                    send_msg(k['docTitle'], get_id, access_token)
                 j['last_send'] += 10  # 发送完成，更新用户的发送标记
                 return "还有%s条" % (len(get_list) - j['last_send'])
             else:
                 wait_to_send = get_list[j['last_send']::]
-                for k in range(len(wait_to_send)):
-                    send_msg(wait_to_send[k]['docTitle'], get_id, access_token)
+                for k in wait_to_send:
+                    send_msg(k['docTitle'], get_id, access_token)
                 j['last_send'] = 0  # 发送完成，清除标记
-
     return
 
 @robot.handler
 def echo(msg):
-    global today_list_time
+    global today_list_time,hot_film
     refresh_token()
     print(msg.source)
     if msg.content == '1':
