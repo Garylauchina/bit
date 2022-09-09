@@ -58,7 +58,7 @@ def send_all(get_list,get_id):
     global user_store,access_token
     for j in user_store:  # 遍历user_store
         if j['openid'] == get_id:
-            if len(get_list) - j[get_id]['last_send'] > 10:  # 如果存在未发数据
+            if len(get_list) - j['last_send'] > 10:  # 如果存在未发数据
                 wait_to_send = get_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多3条并发送
                 for k in wait_to_send:
                     send_msg(k['docTitle'], get_id, access_token)
