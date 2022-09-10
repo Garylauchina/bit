@@ -14,7 +14,7 @@ def get_stock(stock_name):
         r = json.loads(r)
         result = '名称：' + r[stock_name]['name'] + '\n' + '当前价格：' + str(
             r[stock_name]['price']) + '\n' + '涨跌：' + str(
-            round(r[stock_name]['percent'], 2)) + '%\n' + '开盘价格：' + str(
+            round(r[stock_name]['percent']*100, 2)) + '%\n' + '开盘价格：' + str(
             r[stock_name]['open']) + '\n' + '成交额：' + str(int(r[stock_name]['turnover'] / 10000)) + '万元'
     except:
         result = stock_name[1:] + '未查询到该股票数据'
