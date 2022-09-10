@@ -18,12 +18,12 @@ hot_film = film_list()
 print('共搜索到%s部热门电影' % len(hot_film))
 today_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了当天的招标信息，需定时更新
 today_list_time = time.time()  # 上次招标信息更新的时间
-hot_film_time = time.time()     #电影清单更新时间
+hot_film_time = time.time()  # 电影清单更新时间
 print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
     add_user(user_store, i)
 print('总共%s名用户' % len(user_store))
-all_stocks= ts_stocks()          #获取所有上市公司清单
+all_stocks = ts_stocks()  # 获取所有上市公司清单
 
 
 def refresh_list(get_id):
@@ -55,7 +55,7 @@ def refresh_token():
 
 @robot.handler
 def echo(msg):
-    global today_list_time, hot_film,all_stocks
+    global today_list_time, hot_film, all_stocks
     refresh_token()
     print(msg.source)
     if msg.content == '1':
@@ -91,11 +91,11 @@ def echo(msg):
                     j['film_send'] = 0  # 发送完成，清除标记
                     return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
     elif len(msg.content) > 1:
-        codes = search_code(all_stocks,msg.content)
-        for i in codes[:10]:
-            send_msg(i,msg.source,access_token)
+        codes = search_code(all_stocks, msg.content)
+        for j in codes[:10]:
+            send_msg(get_stock(j), msg.source, access_token)
         if len(codes) > 10:
-            send_msg('名字可以准确点，谢谢',msg.source,access_token)
+            send_msg('太多了，名字可以准确点，谢谢', msg.source, access_token)
         return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
     return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
 

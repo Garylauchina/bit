@@ -17,7 +17,7 @@ def get_stock(stock_name):
             round(r[stock_name]['percent'], 2)) + '%\n' + '开盘价格：' + str(
             r[stock_name]['open']) + '\n' + '成交额：' + str(int(r[stock_name]['turnover'] / 10000)) + '万元'
     except:
-        result = '未查询到股票数据'
+        result = stock_name[1:] + '未查询到该股票数据'
     return result
 
 
@@ -44,11 +44,11 @@ def ts_stocks():
 
 # s = ts_stocks()
 # print(s)
-def search_code(get_list,name):
+def search_code(get_list, name):
     search_stock = []
     for i in get_list.keys():
         if name in i:
-            #print(i + ' ' + s[i])
+            # print(i + ' ' + s[i])
             search_stock.append(get_list[i])
     return search_stock
 # aa = search_code('石油')
