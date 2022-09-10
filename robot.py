@@ -92,6 +92,8 @@ def echo(msg):
                     return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
     elif len(msg.content) > 1:
         codes = search_code(all_stocks, msg.content)
+        if len(codes) == 0:
+            return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
         for j in codes[:10]:
             send_msg(get_stock(j), msg.source, access_token)
         if len(codes) > 10:
