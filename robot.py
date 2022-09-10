@@ -6,7 +6,7 @@ import time
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
 print('启动时间：' + now)
-print("版本1.2 通过git更新后，supervisor中重启服务")
+print("版本1.3 加入股票查询")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = new_token()
 token_time = int(time.time())
@@ -18,11 +18,12 @@ hot_film = film_list()
 print('共搜索到%s部热门电影' % len(hot_film))
 today_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了当天的招标信息，需定时更新
 today_list_time = time.time()  # 上次招标信息更新的时间
-hot_film_time = time.time()
+hot_film_time = time.time()     #电影清单更新时间
 print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
     add_user(user_store, i)
 print('总共%s名用户' % len(user_store))
+all_stocks= ts_stocks()          #获取所有上市公司清单
 
 
 def refresh_list(get_id):
@@ -54,7 +55,7 @@ def refresh_token():
 
 @robot.handler
 def echo(msg):
-    global today_list_time, hot_film
+    global today_list_time, hot_film,all_stocks
     refresh_token()
     print(msg.source)
     if msg.content == '1':
@@ -72,7 +73,7 @@ def echo(msg):
                     for k in wait_to_send:
                         send_msg(k, msg.source, access_token)
                     j['last_send'] = 0  # 发送完成，清除标记
-                    return '发送完毕'
+                    return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
     elif msg.content == '2':
         refresh_list(2)
         for j in user_store:  # 遍历user_store
@@ -88,10 +89,15 @@ def echo(msg):
                     for k in wait_to_send:
                         send_msg(k, msg.source, access_token)
                     j['film_send'] = 0  # 发送完成，清除标记
-                    return '发送完毕'
+                    return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
     elif len(msg.content) > 1:
-        return get_stock(msg.content)
-    return '1-电信招标网（阳光\n2-热门影视\n或者七位股票代码：\nSH:0xxxxxx\nSZ:1xxxxxx\nBJ:2xxxxxx'
+        codes = search_code(all_stocks,msg.content)
+        for i in codes[:10]:
+            send_msg(i,msg.source,access_token)
+        if len(codes) > 10:
+            send_msg('名字可以准确点，谢谢',msg.source,access_token)
+        return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
+    return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
 
 
 @robot.subscribe
@@ -102,7 +108,7 @@ def welcome(msg):
     refresh_list(2)
     user_list = all_user(access_token)
     add_user(user_store, msg.source)
-    return '1---电信招标网（阳光\n2---热门影视\n或者七位股票代码：\nSH:0xxxxxx\nSZ:1xxxxxx\nBJ:2xxxxxx'
+    return '1---电信招标网（阳光\n2---热门影视\n或者输入股票中文名，比如"石油"'
 
 
 robot.config['HOST'] = '0.0.0.0'
