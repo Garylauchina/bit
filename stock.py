@@ -12,6 +12,6 @@ def get_stock(stock_name):
         r = json.loads(r)
         result = r[stock_name]['name'] + '\n' + str(r[stock_name]['price'])
     except:
-        result = 'SH:0xxxxxx,SZ:1xxxxxx,BJ:2xxxxxx'
+        result = 'SH:0xxxxxx\nSZ:1xxxxxx\nBJ:2xxxxxx'
     return result
 

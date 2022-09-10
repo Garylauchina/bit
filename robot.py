@@ -89,9 +89,9 @@ def echo(msg):
                         send_msg(k, msg.source, access_token)
                     j['film_send'] = 0  # 发送完成，清除标记
                     return '发送完毕'
-    else:
+    elif len(msg.content) > 1:
         return get_stock(msg.content)
-    return '1-电信招标网（阳光\n2-热门影视\n3-SH:0xxxxxx,SZ:1xxxxxx,BJ:2xxxxxx'
+    return '1-电信招标网（阳光\n2-热门影视\n或者七位股票代码：\nSH:0xxxxxx\nSZ:1xxxxxx\nBJ:2xxxxxx'
 
 
 @robot.subscribe
@@ -102,7 +102,7 @@ def welcome(msg):
     refresh_list(2)
     user_list = all_user(access_token)
     add_user(user_store, msg.source)
-    return '1---电信招标网（阳光\n2---热门影视\n3-SH:0xxxxxx,SZ:1xxxxxx,BJ:2xxxxxx'
+    return '1---电信招标网（阳光\n2---热门影视\n或者七位股票代码：\nSH:0xxxxxx\nSZ:1xxxxxx\nBJ:2xxxxxx'
 
 
 robot.config['HOST'] = '0.0.0.0'
