@@ -1,6 +1,7 @@
 from ddys import *
 import werobot
 from sunshine import *
+from stock import *
 import time
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -20,7 +21,7 @@ today_list_time = time.time()  # 上次招标信息更新的时间
 hot_film_time = time.time()
 print('共搜索到%s条招标信息' % len(today_list))
 for i in user_list:
-    add_user(user_store,i)
+    add_user(user_store, i)
 print('总共%s名用户' % len(user_store))
 
 
@@ -72,24 +73,25 @@ def echo(msg):
                         send_msg(k, msg.source, access_token)
                     j['last_send'] = 0  # 发送完成，清除标记
                     return '发送完毕'
+    elif msg.content == '2':
+        refresh_list(2)
+        for j in user_store:  # 遍历user_store
+            if j['openid'] == msg.source:
+                if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
+                    wait_to_send = hot_film[j['film_send']:j['film_send'] + 10]  # 则切片最多最多10条并发送
+                    for k in wait_to_send:
+                        send_msg(k, msg.source, access_token)
+                    j['film_send'] += 10  # 发送完成，更新用户的发送标记
+                    return "还有%s条" % (len(hot_film) - j['film_send'])
+                else:
+                    wait_to_send = hot_film[j['film_send']::]
+                    for k in wait_to_send:
+                        send_msg(k, msg.source, access_token)
+                    j['film_send'] = 0  # 发送完成，清除标记
+                    return '发送完毕'
     else:
-        if msg.content == '2':
-            refresh_list(2)
-            for j in user_store:  # 遍历user_store
-                if j['openid'] == msg.source:
-                    if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
-                        wait_to_send = hot_film[j['film_send']:j['film_send'] + 10]  # 则切片最多最多10条并发送
-                        for k in wait_to_send:
-                            send_msg(k, msg.source, access_token)
-                        j['film_send'] += 10  # 发送完成，更新用户的发送标记
-                        return "还有%s条" % (len(hot_film) - j['film_send'])
-                    else:
-                        wait_to_send = hot_film[j['film_send']::]
-                        for k in wait_to_send:
-                            send_msg(k, msg.source, access_token)
-                        j['film_send'] = 0  # 发送完成，清除标记
-                        return '发送完毕'
-    return '1---电信招标网（阳光）\n 2---热门影视'
+        return get_stock(msg.content)
+    return '1-电信招标网（阳光\n2-热门影视\n3-SH:0xxxxxx,SZ:1xxxxxx,BJ:2xxxxxx'
 
 
 @robot.subscribe
@@ -100,7 +102,7 @@ def welcome(msg):
     refresh_list(2)
     user_list = all_user(access_token)
     add_user(user_store, msg.source)
-    return '1---电信招标网（阳光）\n 2---热门影视'
+    return '1---电信招标网（阳光\n2---热门影视\n3-SH:0xxxxxx,SZ:1xxxxxx,BJ:2xxxxxx'
 
 
 robot.config['HOST'] = '0.0.0.0'
