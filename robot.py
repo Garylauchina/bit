@@ -74,7 +74,7 @@ def echo(msg):
     refresh_list(msg.content)
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
-        wait_to_send = send_msg(ct_list, msg.source, access_token)
+        wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
             user_tag[0] += 10
             return "还有%s条" % (len(ct_list) - user_tag[0])
@@ -82,7 +82,7 @@ def echo(msg):
             user_tag[0] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        wait_to_send = send_msg(cm_list, msg.source, access_token)
+        wait_to_send = send_msg(cm_list[user_tag[1]::], msg.source, access_token)
         if wait_to_send:
             user_tag[1] += 10
             return "还有%s条" % (len(cm_list) - user_tag[1])
@@ -90,7 +90,7 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        wait_to_send = send_msg(hot_film, msg.source, access_token)
+        wait_to_send = send_msg(hot_film[user_tag[2]::], msg.source, access_token)
         if wait_to_send:
             user_tag[2] += 10
             return "还有%s条" % (len(hot_film) - user_tag[2])
@@ -105,7 +105,7 @@ def echo(msg):
             stock_data = []
             for j in codes:
                 stock_data.append(get_stock(j))
-            wait_to_send = send_msg(stock_data, msg.source, access_token)
+            wait_to_send = send_msg(stock_data[user_tag[3]::], msg.source, access_token)
             if wait_to_send:
                 user_tag[3] += 10
                 return "还有%s条" % (len(stock_data) - user_tag[3])
