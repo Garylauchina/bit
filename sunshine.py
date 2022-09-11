@@ -46,7 +46,7 @@ def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最
         }
         msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
         requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-    return message_list[10::]          #去除前十个数据后返回
+    return message_list[10::]  # 去除前十个数据后返回
 
 
 def sunshine_list():
