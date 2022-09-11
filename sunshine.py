@@ -2,9 +2,6 @@ import time
 import requests
 import json
 
-
-
-
 argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
 argu3 = '6bf950052b38e94da3259b5a4bc11e12'
@@ -39,6 +36,7 @@ def new_token():
     print('有效期：' + str(a['expires_in']) + '秒')
     return a['access_token']
 
+
 # 向微信公众号的用户发送消息
 def send_msg(get_message, get_user, get_token):
     send_url = '/message/custom/send?access_token=%s'
@@ -48,6 +46,7 @@ def send_msg(get_message, get_user, get_token):
     msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
     requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
     return
+
 
 def sunshine_list():
     # 中国电信阳光采购网
@@ -62,7 +61,8 @@ def sunshine_list():
         'Connection': 'keep-alive',
         'Content-Length': '107',
         'Content-Type': 'application/json;charset=UTF-8',
-        'Cookie': 'Secure;Secure;CaiGouServiceInfo=!OMtbDA1sN2Py46c1qhgwHmp4DxKAGFH+DKDyAO7lgQKpNe9HwoMbDwU/c/+2+6foSh7UiZwftGPZv/8=;JSESSIONID=0000tGpQLjAkIEtrEg9v2AVqXEq:18djc0l04;Secure=',
+        'Cookie': 'Secure;Secure;CaiGouServiceInfo=!OMtbDA1sN2Py46c1qhgwHmp4DxKAGFH+DKDyAO7lgQKpNe9HwoMbDwU/c/+2'
+                  '+6foSh7UiZwftGPZv/8=;JSESSIONID=0000tGpQLjAkIEtrEg9v2AVqXEq:18djc0l04;Secure=',
         'Host': 'caigou.chinatelecom.com.cn',
         'Origin': 'https://caigou.chinatelecom.com.cn',
         'Referer': 'https://caigou.chinatelecom.com.cn/ctsc-portal/search?search=',
@@ -72,7 +72,8 @@ def sunshine_list():
         'Sec-Fetch-Dest': 'empty',
         'Sec-Fetch-Mode': 'cors',
         'Sec-Fetch-Site': 'same-origin',
-        'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,likeGecko)Chrome/105.0.0.0Safari/537.36',
+        'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,'
+                      'likeGecko)Chrome/105.0.0.0Safari/537.36',
     }
     data = {
         'pageNum': 1,
@@ -95,7 +96,6 @@ def sunshine_list():
         data['pageNum'] = data['pageNum'] + 1
     return bit_list
 
-
 # def sunshine_html(get_bit_dict):
 #     html_1 = 'https://caigou.chinatelecom.com.cn/ctsc-portal'
 #     bit_type = {
@@ -106,6 +106,3 @@ def sunshine_list():
 #         '招标公告': '',
 #     }
 #     return
-
-
-

@@ -72,48 +72,46 @@ def echo(msg):
     refresh_token()
     print(msg.source)
     refresh_list(msg.content)
+    user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
-        for j in user_status:  # 遍历user_status
-            if len(ct_list) - j[msg.source][0] > 10:
-                wait_to_send = ct_list[j[msg.source][0]:j[msg.source][0] + 10]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][0] += 10
-                return "还有%s条" % (len(ct_list) - j[msg.source][0])
-            else:
-                wait_to_send = ct_list[j[msg.source][0]::]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][0] = 0
-                return '发送完毕\n' + lg_menu
+        if len(ct_list) - user_tag[0] > 10:
+            wait_to_send = ct_list[user_tag[0]:user_tag[0] + 10]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[0] += 10
+            return "还有%s条" % (len(ct_list) - user_tag[0])
+        else:
+            wait_to_send = ct_list[user_tag[0]::]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[0] = 0
+            return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        for j in user_status:
-            if len(cm_list) - j[msg.source][1] > 10:
-                wait_to_send = cm_list[j[msg.source][1]:j[msg.source][1] + 10]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][1] += 10
-                return "还有%s条" % (len(cm_list) - j[msg.source][1])
-            else:
-                wait_to_send = cm_list[j[msg.source][1]::]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][1] = 0
-                return '发送完毕\n' + lg_menu
+        if len(cm_list) - user_tag[1] > 10:
+            wait_to_send = cm_list[user_tag[1]:user_tag[1] + 10]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[1] += 10
+            return "还有%s条" % (len(cm_list) - user_tag[1])
+        else:
+            wait_to_send = cm_list[user_tag[1]::]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[1] = 0
+            return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        for j in user_status:
-            if len(hot_film) - j[msg.source][2] > 10:
-                wait_to_send = hot_film[j[msg.source][2]:j[msg.source][2] + 10]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][2] += 10
-                return "还有%s条" % (len(hot_film) - j[msg.source][2])
-            else:
-                wait_to_send = hot_film[j[msg.source][2]::]
-                for k in wait_to_send:
-                    send_msg(k, msg.source, access_token)
-                j[msg.source][2] = 0
-                return '发送完毕\n' + lg_menu
+        if len(hot_film) - user_tag[2] > 10:
+            wait_to_send = hot_film[user_tag[2]:user_tag[2] + 10]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[2] += 10
+            return "还有%s条" % (len(hot_film) - user_tag[2])
+        else:
+            wait_to_send = hot_film[user_tag[2]::]
+            for k in wait_to_send:
+                send_msg(k, msg.source, access_token)
+            user_tag[2] = 0
+            return '发送完毕\n' + lg_menu
     elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文
         codes = search_code(all_stocks, msg.content)
         if len(codes) == 0:
@@ -121,7 +119,7 @@ def echo(msg):
         for j in codes[:10]:
             send_msg(get_stock(j), msg.source, access_token)
         if len(codes) > 10:
-            send_msg('太多了，名字可以准确点，谢谢', msg.source, access_token)
+            send_msg('包含"%s"的公司太多了' % msg.content, msg.source, access_token)
         return lg_menu
     return lg_menu
 
@@ -136,8 +134,7 @@ def welcome(msg):
     add_user(user_status, msg.source)
     return '1---电信招标网（阳光\n2---热门影视\n或者输入股票中文名，比如"石油"'
 
+
 robot.config['HOST'] = '0.0.0.0'
 robot.config['PORT'] = 80
 robot.run()
-
-
