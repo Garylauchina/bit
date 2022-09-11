@@ -28,7 +28,7 @@ print('共搜索到%s部热门电影' % len(hot_film))
 # 初始化用户状态库
 user_status = {}
 for i in user_list:
-    user_status[i] = [0, 0, 0]  # 初始化用户状态，三个数值分别代表三个列表的发送断点
+    user_status[i] = [0, 0, 0, 0]  # 初始化用户状态，四个数值分别代表四个列表的发送断点
 print('总共%s名用户' % len(user_list))
 # 获取所有上市公司清单
 all_stocks = ts_stocks()  # 获取所有上市公司清单
@@ -74,53 +74,44 @@ def echo(msg):
     refresh_list(msg.content)
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
-        if len(ct_list) - user_tag[0] > 10:
-            wait_to_send = ct_list[user_tag[0]:user_tag[0] + 10]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
+        wait_to_send = send_msg(ct_list, msg.source, access_token)
+        if wait_to_send:
             user_tag[0] += 10
             return "还有%s条" % (len(ct_list) - user_tag[0])
         else:
-            wait_to_send = ct_list[user_tag[0]::]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
             user_tag[0] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        if len(cm_list) - user_tag[1] > 10:
-            wait_to_send = cm_list[user_tag[1]:user_tag[1] + 10]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
+        wait_to_send = send_msg(cm_list, msg.source, access_token)
+        if wait_to_send:
             user_tag[1] += 10
             return "还有%s条" % (len(cm_list) - user_tag[1])
         else:
-            wait_to_send = cm_list[user_tag[1]::]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        if len(hot_film) - user_tag[2] > 10:
-            wait_to_send = hot_film[user_tag[2]:user_tag[2] + 10]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
+        wait_to_send = send_msg(hot_film, msg.source, access_token)
+        if wait_to_send:
             user_tag[2] += 10
             return "还有%s条" % (len(hot_film) - user_tag[2])
         else:
-            wait_to_send = hot_film[user_tag[2]::]
-            for k in wait_to_send:
-                send_msg(k, msg.source, access_token)
             user_tag[2] = 0
             return '发送完毕\n' + lg_menu
     elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文
         codes = search_code(all_stocks, msg.content)
         if len(codes) == 0:
             return '没有%s这个股票\n' % msg.content + lg_menu
-        for j in codes[:10]:
-            send_msg(get_stock(j), msg.source, access_token)
-        if len(codes) > 10:
-            send_msg('包含"%s"的公司太多了' % msg.content, msg.source, access_token)
-        return lg_menu
+        else:
+            stock_data = []
+            for j in codes:
+                stock_data.append(get_stock(j))
+            wait_to_send = send_msg(stock_data, msg.source, access_token)
+            if wait_to_send:
+                user_tag[3] += 10
+                return "还有%s条" % (len(stock_data) - user_tag[3])
+            else:
+                user_tag[3] = 0
+                return '发送完毕\n' + lg_menu
     return lg_menu
 
 

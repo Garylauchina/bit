@@ -38,14 +38,15 @@ def new_token():
 
 
 # 向微信公众号的用户发送消息
-def send_msg(get_message, get_user, get_token):
+def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最多十个
     send_url = '/message/custom/send?access_token=%s'
-    content = {
-        'content': get_message
-    }
-    msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
-    requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-    return
+    for i in min(range(len(message_list), 10)):
+        content = {
+            'content': message_list[i]
+        }
+        msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
+        requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
+    return message_list[10::]          #去除前十个数据后返回
 
 
 def sunshine_list():

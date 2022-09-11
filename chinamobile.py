@@ -13,10 +13,10 @@ def cm_new_list():
         'noticeBean.title': '',
         'noticeBean.startDate': '',
         'noticeBean.endDate': '',
-        '_qt': 'TNjZ2YgjM5UzMykzMiNmMmNjNiFDNyEzN1E2M3MWOhl',
+        '_qt': 'WYxQDNUGO4YGOmZDM1UzNxgTOykDNmJWYjdDNyQzNwY',
     }
     headers = {
-        'Cookie': 'JSESSIONID=9F1AFB46747F7A7C7F18AF387ED32B5C',
+        'Cookie': 'JSESSIONID=97D903FA9A3914E38F68E2602973EE75',
         'Referer': 'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2',
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) '
                       'Chrome/105.0.0.0 Safari/537.36',
