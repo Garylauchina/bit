@@ -30,7 +30,9 @@ user_status = {}
 for i in user_list:
     user_status[i] = [0, 0, 0]  # 初始化用户状态，三个数值分别代表三个列表的发送断点
 print('总共%s名用户' % len(user_list))
+# 获取所有上市公司清单
 all_stocks = ts_stocks()  # 获取所有上市公司清单
+print('更新%s家上市公司信息' % len(all_stocks))
 
 
 def refresh_list(get_id):
@@ -71,7 +73,7 @@ def echo(msg):
     print(msg.source)
     refresh_list(msg.content)
     if msg.content == '1':
-        for j in user_store:  # 遍历user_store
+        for j in user_status:  # 遍历user_status
             if len(ct_list) - j[msg.source][0] > 10:
                 wait_to_send = ct_list[j[msg.source][0]:j[msg.source][0] + 10]
                 for k in wait_to_send:
@@ -85,7 +87,7 @@ def echo(msg):
                 j[msg.source][0] = 0
                 return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        for j in user_store:
+        for j in user_status:
             if len(cm_list) - j[msg.source][1] > 10:
                 wait_to_send = cm_list[j[msg.source][1]:j[msg.source][1] + 10]
                 for k in wait_to_send:
@@ -99,7 +101,7 @@ def echo(msg):
                 j[msg.source][1] = 0
                 return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        for j in user_store:
+        for j in user_status:
             if len(hot_film) - j[msg.source][2] > 10:
                 wait_to_send = hot_film[j[msg.source][2]:j[msg.source][2] + 10]
                 for k in wait_to_send:
@@ -112,7 +114,7 @@ def echo(msg):
                     send_msg(k, msg.source, access_token)
                 j[msg.source][2] = 0
                 return '发送完毕\n' + lg_menu
-    elif u'/u4e00' < msg.content <= u'/u9fa5':  # 判断输入的是中文
+    elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文
         codes = search_code(all_stocks, msg.content)
         if len(codes) == 0:
             return '没有%s这个股票\n' % msg.content + lg_menu
@@ -126,12 +128,12 @@ def echo(msg):
 
 @robot.subscribe
 def welcome(msg):
-    global access_token, user_list, user_store
+    global access_token, user_list, user_status
     refresh_token()
     refresh_list(1)
     refresh_list(2)
     user_list = all_user(access_token)
-    add_user(user_store, msg.source)
+    add_user(user_status, msg.source)
     return '1---电信招标网（阳光\n2---热门影视\n或者输入股票中文名，比如"石油"'
 
 
