@@ -3,23 +3,27 @@ import werobot
 from sunshine import *
 from stock import *
 import time
+from chinamobile import *
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
 print('启动时间：' + now)
-print("版本1.3 加入股票查询")
+print("版本1.4 加入广西移动招标信息")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
-
+lg_menu = '1-广西电信招标\n2-广西移动招标\n3-热门影视\n或者输入股票中文名，比如"石油"'
 user_label = {}
 user_store = []
 hot_film = film_list()
 print('共搜索到%s部热门电影' % len(hot_film))
-today_list = sunshine_list()  # 这是一个列表，里面的元素是字典,存储了当天的招标信息，需定时更新
-today_list_time = time.time()  # 上次招标信息更新的时间
+today_list = sunshine_list()  # 这是一个列表，里面的元素是列表,存储了当天的招标信息，需定时更新
+today_list_time = time.time()  # 电信招标信息更新的时间
 hot_film_time = time.time()  # 电影清单更新时间
-print('共搜索到%s条招标信息' % len(today_list))
+cm_list_time = time.time()  # 移动招标列表更新时间
+print('共搜索到%s条电信招标信息' % len(today_list))
+cm_new_list = cm_list()
+print('共搜索到%s条移动招标信息' % len(cm_new_list))
 for i in user_list:
     add_user(user_store, i)
 print('总共%s名用户' % len(user_store))
@@ -27,18 +31,22 @@ all_stocks = ts_stocks()  # 获取所有上市公司清单
 
 
 def refresh_list(get_id):
-    global today_list, hot_film, today_list_time, hot_film_time
+    global today_list, hot_film, today_list_time, hot_film_time, cm_list_time, cm_new_list
     if get_id == 1:
         if time.time() - today_list_time > 1800:  # 每三十分钟更新一次招标信息
             today_list = sunshine_list()
             today_list_time = time.time()
-            print('招标列表已更新')
-    else:
-        if get_id == 2:
-            if time.time() - hot_film_time > 1800:  # 每三十分钟更新一次招标信息
-                hot_film = film_list()
-                hot_film_time = time.time()
-                print('电影列表已更新')
+            print('电信招标信息已更新')
+    elif get_id == 3:
+        if time.time() - hot_film_time > 1800:  # 每三十分钟更新一次招标信息
+            hot_film = film_list()
+            hot_film_time = time.time()
+            print('电影列表已更新')
+    elif get_id == 2:
+        if time.time() - cm_list_time > 1800:  # 每三十分钟更新一次招标信息
+            cm_new_list = cm_list()
+            cm_list_time = time.time()
+            print('移动招标信息已更新')
     return
 
 
@@ -73,9 +81,9 @@ def echo(msg):
                     for k in wait_to_send:
                         send_msg(k, msg.source, access_token)
                     j['last_send'] = 0  # 发送完成，清除标记
-                    return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
-    elif msg.content == '2':
-        refresh_list(2)
+                    return lg_menu
+    elif msg.content == '3':
+        refresh_list(3)
         for j in user_store:  # 遍历user_store
             if j['openid'] == msg.source:
                 if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
@@ -89,17 +97,24 @@ def echo(msg):
                     for k in wait_to_send:
                         send_msg(k, msg.source, access_token)
                     j['film_send'] = 0  # 发送完成，清除标记
-                    return '发送完毕\n1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
+                    return lg_menu
     elif len(msg.content) > 1:
         codes = search_code(all_stocks, msg.content)
         if len(codes) == 0:
-            return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
+            return lg_menu
         for j in codes[:10]:
             send_msg(get_stock(j), msg.source, access_token)
         if len(codes) > 10:
             send_msg('太多了，名字可以准确点，谢谢', msg.source, access_token)
-        return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
-    return '1-电信招标网（阳光\n2-热门影视\n或者输入股票中文名，比如"石油"'
+        return lg_menu
+    elif msg.content == '2':
+        refresh_list(2)
+        for j in user_store:  # 遍历user_store
+            if j['openid'] == msg.source:
+                for k in cm_new_list:
+                    send_msg(k, msg.source, access_token)
+                return '发送完毕\n' + lg_menu
+    return lg_menu
 
 
 @robot.subscribe

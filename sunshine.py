@@ -2,6 +2,9 @@ import time
 import requests
 import json
 
+
+
+
 argu1 = 'client_credential'
 argu2 = 'wx7bd1096d014dc5c4'
 argu3 = '6bf950052b38e94da3259b5a4bc11e12'
@@ -36,6 +39,15 @@ def new_token():
     print('有效期：' + str(a['expires_in']) + '秒')
     return a['access_token']
 
+# 向微信公众号的用户发送消息
+def send_msg(get_message, get_user, get_token):
+    send_url = '/message/custom/send?access_token=%s'
+    content = {
+        'content': get_message
+    }
+    msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
+    requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
+    return
 
 def sunshine_list():
     # 中国电信阳光采购网
@@ -84,7 +96,7 @@ def sunshine_list():
     return bit_list
 
 
-# def cal_html(get_bit_dict):
+# def sunshine_html(get_bit_dict):
 #     html_1 = 'https://caigou.chinatelecom.com.cn/ctsc-portal'
 #     bit_type = {
 #         '采购结果公示': '/Nopublicity/jieguoDetail/412290',
@@ -96,18 +108,4 @@ def sunshine_list():
 #     return
 
 
-# k = sunshine_list()
-# print(len(k))
-# for i in k:
-#     print(i)
 
-
-# 向微信公众号发送消息
-def send_msg(get_message, get_user, get_token):
-    send_url = '/message/custom/send?access_token=%s'
-    content = {
-        'content': get_message
-    }
-    msg_pkg = {'touser': get_user, 'msgtype': 'text', 'text': content}
-    requests.post(base_url + send_url % get_token, json.dumps(msg_pkg, ensure_ascii=False).encode('utf-8'))
-    return
