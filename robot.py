@@ -126,6 +126,7 @@ def welcome(msg):
     return '1---电信招标网（阳光\n2---热门影视\n或者输入股票中文名，比如"石油"'
 
 
+
 robot.config['HOST'] = '0.0.0.0'
 robot.config['PORT'] = 80
 robot.run()
