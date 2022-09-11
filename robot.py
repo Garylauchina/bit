@@ -33,7 +33,7 @@ print('总共%s名用户' % len(user_list))
 # 获取所有上市公司清单
 all_stocks = ts_stocks()  # 获取所有上市公司清单
 print('更新%s家上市公司信息' % len(all_stocks))
-
+print(user_status)
 
 def refresh_list(get_id):
     global ct_list, hot_film, ct_list_time, hot_film_time, cm_list_time, cm_list

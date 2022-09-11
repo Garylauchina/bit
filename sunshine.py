@@ -40,7 +40,7 @@ def new_token():
 # 向微信公众号的用户发送消息
 def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最多十个
     send_url = '/message/custom/send?access_token=%s'
-    for i in min(range(len(message_list), 10)):
+    for i in range(min(range(len(message_list), 10))):
         content = {
             'content': message_list[i]
         }
