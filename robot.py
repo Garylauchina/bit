@@ -12,39 +12,42 @@ robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
-lg_menu = '1-广西电信招标\n2-广西移动招标\n3-热门影视\n或者输入股票中文名，比如"石油"'
-user_label = {}
-user_store = []
-hot_film = film_list()
-print('共搜索到%s部热门电影' % len(hot_film))
-today_list = sunshine_list()  # 这是一个列表，里面的元素是列表,存储了当天的招标信息，需定时更新
-today_list_time = time.time()  # 电信招标信息更新的时间
-hot_film_time = time.time()  # 电影清单更新时间
+lg_menu = '请输入：\n1-广西电信招标\n2-广西移动招标\n3-热门影视\n或者股票中文名，比如"石油"'
+# 更新电信招标信息
+ct_list = sunshine_list()  # 这是一个列表，里面的元素是列表,存储了当天的招标信息，需定时更新
+ct_list_time = time.time()  # 电信招标信息更新的时间
+print('共搜索到%s条电信招标信息' % len(ct_list))
+# 更新移动招标信息
+cm_list = cm_new_list()
 cm_list_time = time.time()  # 移动招标列表更新时间
-print('共搜索到%s条电信招标信息' % len(today_list))
-cm_new_list = cm_list()
-print('共搜索到%s条移动招标信息' % len(cm_new_list))
+print('共搜索到%s条移动招标信息' % len(cm_list))
+# 更新电影清单
+hot_film = film_list()
+hot_film_time = time.time()  # 电影清单更新时间
+print('共搜索到%s部热门电影' % len(hot_film))
+# 初始化用户状态库
+user_status = {}
 for i in user_list:
-    add_user(user_store, i)
-print('总共%s名用户' % len(user_store))
+    user_status[i] = [0, 0, 0]  # 初始化用户状态，三个数值分别代表三个列表的发送断点
+print('总共%s名用户' % len(user_list))
 all_stocks = ts_stocks()  # 获取所有上市公司清单
 
 
 def refresh_list(get_id):
-    global today_list, hot_film, today_list_time, hot_film_time, cm_list_time, cm_new_list
-    if get_id == 1:
-        if time.time() - today_list_time > 1800:  # 每三十分钟更新一次招标信息
-            today_list = sunshine_list()
-            today_list_time = time.time()
+    global ct_list, hot_film, ct_list_time, hot_film_time, cm_list_time, cm_list
+    if get_id == '1':
+        if time.time() - ct_list_time > 1800:  # 每三十分钟更新一次招标信息
+            ct_list = sunshine_list()
+            ct_list_time = time.time()
             print('电信招标信息已更新')
-    elif get_id == 3:
+    elif get_id == '3':
         if time.time() - hot_film_time > 1800:  # 每三十分钟更新一次招标信息
             hot_film = film_list()
             hot_film_time = time.time()
             print('电影列表已更新')
-    elif get_id == 2:
+    elif get_id == '2':
         if time.time() - cm_list_time > 1800:  # 每三十分钟更新一次招标信息
-            cm_new_list = cm_list()
+            cm_list = cm_new_list()
             cm_list_time = time.time()
             print('移动招标信息已更新')
     return
@@ -63,57 +66,61 @@ def refresh_token():
 
 @robot.handler
 def echo(msg):
-    global today_list_time, hot_film, all_stocks
+    global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, all_stocks
     refresh_token()
     print(msg.source)
+    refresh_list(msg.content)
     if msg.content == '1':
-        refresh_list(1)
         for j in user_store:  # 遍历user_store
-            if j['openid'] == msg.source:
-                if len(today_list) - j['last_send'] > 10:  # 如果存在未发数据
-                    wait_to_send = today_list[j['last_send']:j['last_send'] + 10]  # 则切片最多最多10条并发送
-                    for k in wait_to_send:
-                        send_msg(k, msg.source, access_token)
-                    j['last_send'] += 10  # 发送完成，更新用户的发送标记
-                    return "还有%s条" % (len(today_list) - j['last_send'])
-                else:
-                    wait_to_send = today_list[j['last_send']::]
-                    for k in wait_to_send:
-                        send_msg(k, msg.source, access_token)
-                    j['last_send'] = 0  # 发送完成，清除标记
-                    return lg_menu
+            if len(ct_list) - j[msg.source][0] > 10:
+                wait_to_send = ct_list[j[msg.source][0]:j[msg.source][0] + 10]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][0] += 10
+                return "还有%s条" % (len(ct_list) - j[msg.source][0])
+            else:
+                wait_to_send = ct_list[j[msg.source][0]::]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][0] = 0
+                return '发送完毕\n' + lg_menu
+    elif msg.content == '2':
+        for j in user_store:
+            if len(cm_list) - j[msg.source][1] > 10:
+                wait_to_send = cm_list[j[msg.source][1]:j[msg.source][1] + 10]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][1] += 10
+                return "还有%s条" % (len(cm_list) - j[msg.source][1])
+            else:
+                wait_to_send = cm_list[j[msg.source][1]::]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][1] = 0
+                return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        refresh_list(3)
-        for j in user_store:  # 遍历user_store
-            if j['openid'] == msg.source:
-                if len(hot_film) - j['film_send'] > 10:  # 如果存在未发数据
-                    wait_to_send = hot_film[j['film_send']:j['film_send'] + 10]  # 则切片最多最多10条并发送
-                    for k in wait_to_send:
-                        send_msg(k, msg.source, access_token)
-                    j['film_send'] += 10  # 发送完成，更新用户的发送标记
-                    return "还有%s条" % (len(hot_film) - j['film_send'])
-                else:
-                    wait_to_send = hot_film[j['film_send']::]
-                    for k in wait_to_send:
-                        send_msg(k, msg.source, access_token)
-                    j['film_send'] = 0  # 发送完成，清除标记
-                    return lg_menu
-    elif len(msg.content) > 1:
+        for j in user_store:
+            if len(hot_film) - j[msg.source][2] > 10:
+                wait_to_send = hot_film[j[msg.source][2]:j[msg.source][2] + 10]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][2] += 10
+                return "还有%s条" % (len(hot_film) - j[msg.source][2])
+            else:
+                wait_to_send = hot_film[j[msg.source][2]::]
+                for k in wait_to_send:
+                    send_msg(k, msg.source, access_token)
+                j[msg.source][2] = 0
+                return '发送完毕\n' + lg_menu
+    elif u'/u4e00' < msg.content <= u'/u9fa5':  # 判断输入的是中文
         codes = search_code(all_stocks, msg.content)
         if len(codes) == 0:
-            return lg_menu
+            return '没有%s这个股票\n' % msg.content + lg_menu
         for j in codes[:10]:
             send_msg(get_stock(j), msg.source, access_token)
         if len(codes) > 10:
             send_msg('太多了，名字可以准确点，谢谢', msg.source, access_token)
         return lg_menu
-    elif msg.content == '2':
-        refresh_list(2)
-        for j in user_store:  # 遍历user_store
-            if j['openid'] == msg.source:
-                for k in cm_new_list:
-                    send_msg(k, msg.source, access_token)
-                return '发送完毕\n' + lg_menu
     return lg_menu
 
 
