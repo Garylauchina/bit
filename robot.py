@@ -34,7 +34,6 @@ print('总共%s名用户' % len(user_list))
 all_stocks = ts_stocks()  # 获取所有上市公司清单
 print('更新%s家上市公司信息' % len(all_stocks))
 
-
 def refresh_list(get_id):
     global ct_list, hot_film, ct_list_time, hot_film_time, cm_list_time, cm_list
     if get_id == '1':
@@ -68,7 +67,7 @@ def refresh_token():
 
 @robot.handler
 def echo(msg):
-    global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, all_stocks
+    global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, all_stocks,user_status
     refresh_token()
     print(msg.source)
     refresh_list(msg.content)
