@@ -103,10 +103,10 @@ def echo(msg):
             return '没有%s这个股票\n' % msg.content + lg_menu
         else:
             stock_data = []
-            for j in codes:
-                stock_data.append(get_stock(j))
-            wait_to_send = send_msg(stock_data[0:9], msg.source, access_token)
-            if wait_to_send:
+            for j in range(min(10, len(codes))):
+                stock_data.append(get_stock(codes(j)))
+            send_msg(stock_data, msg.source, access_token)
+            if len(codes) <= 10:
                 return '发送完毕\n' + lg_menu
             else:
                 return '太多了，输入准确点\n' + lg_menu
