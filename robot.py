@@ -104,7 +104,7 @@ def echo(msg):
         else:
             stock_data = []
             for j in range(min(10, len(codes))):
-                stock_data.append(get_stock(codes(j)))
+                stock_data.append(get_stock(codes[j]))
             send_msg(stock_data, msg.source, access_token)
             if len(codes) <= 10:
                 return '发送完毕\n' + lg_menu
