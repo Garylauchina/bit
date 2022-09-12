@@ -105,13 +105,11 @@ def echo(msg):
             stock_data = []
             for j in codes:
                 stock_data.append(get_stock(j))
-            wait_to_send = send_msg(stock_data[user_tag[3]::], msg.source, access_token)
+            wait_to_send = send_msg(stock_data[0:9], msg.source, access_token)
             if wait_to_send:
-                user_tag[3] += 10
-                return "还有%s条" % (len(stock_data) - user_tag[3])
-            else:
-                user_tag[3] = 0
                 return '发送完毕\n' + lg_menu
+            else:
+                return '太多了，输入准确点\n' + lg_menu
     return lg_menu
 
 
@@ -124,7 +122,6 @@ def welcome(msg):
     user_list = all_user(access_token)
     add_user(user_status, msg.source)
     return '1---电信招标网（阳光\n2---热门影视\n或者输入股票中文名，比如"石油"'
-
 
 
 robot.config['HOST'] = '0.0.0.0'
