@@ -6,19 +6,23 @@ import tushare as ts
 
 # 用网易平台api获取股票数据。
 def get_stock(stock_name):
+    new_name = stock_name[-3:] + stock_name[:6]
+    new_name = new_name.replace('.SH', '0')
+    new_name = new_name.replace('.SZ', '1')
+    new_name = new_name.replace('.BJ', '2')
     try:
-        r = requests.get('http://api.money.126.net/data/feed/%s,money.api' % stock_name).text
+        r = requests.get('http://api.money.126.net/data/feed/%s,money.api' % new_name).text
         #        r = r.encode().decode('unicode_escape')
         r = re.findall(r"_ntes_quote_callback\((.*)\);", r)
         r = r[0]
         r = json.loads(r)
-        result = '名称：' + r[stock_name]['name'] + '\n' + '当前价格：' + str(
-            r[stock_name]['price']) + '\n' + '涨跌：' + str(
-            round(r[stock_name]['percent']*100, 2)) + '%\n' + '开盘价格：' + str(
-            r[stock_name]['open']) + '\n' + '成交额：' + str(int(r[stock_name]['turnover'] / 10000)) + '万元'
+        result = '名称：' + r[new_name]['name'] + '\n' + '代码：' + stock_name + '\n' + '当前价格：' + str(
+            r[new_name]['price']) + '\n' + '涨跌：' + str(
+            round(r[new_name]['percent'] * 100, 2)) + '%\n' + '开盘价格：' + str(
+            r[new_name]['open']) + '\n' + '成交额：' + str(int(r[new_name]['turnover'] / 10000)) + '万元'
+        return result
     except:
-        result = stock_name[1:] + '未查询到该股票数据'
-    return result
+        return
 
 
 # 用tushare平台获取股票数据
@@ -34,11 +38,6 @@ def ts_stocks():
     all_stocks = {}
     for i in ts_code.keys():  # 代码和名称合并为一个字典
         all_stocks[stock_name[i]] = ts_code[i]
-    for i in all_stocks.keys():
-        all_stocks[i] = all_stocks[i][-3:] + all_stocks[i][:6]
-        all_stocks[i] = all_stocks[i].replace('.SH', '0')
-        all_stocks[i] = all_stocks[i].replace('.SZ', '1')
-        all_stocks[i] = all_stocks[i].replace('.BJ', '2')
     return all_stocks
 
 
@@ -51,6 +50,4 @@ def search_code(get_list, name):
             # print(i + ' ' + s[i])
             search_stock.append(get_list[i])
     return search_stock
-# aa = search_code('石油')
-# for i in aa:
-#     print(get_stock(i))
+
