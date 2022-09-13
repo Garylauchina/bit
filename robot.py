@@ -124,6 +124,7 @@ def welcome(msg):
     refresh_token()
     refresh_list(1)
     refresh_list(2)
+    refresh_list(3)
     user_list = all_user(access_token)
     user_status[msg.source] = [0, 0, 0, 0]
     return lg_menu
