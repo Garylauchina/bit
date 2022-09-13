@@ -86,17 +86,26 @@ def sunshine_list():
         'type': "0"
     }
     while hasnextpage:
-        r = requests.post(url, json=data, headers=headers)
-        r = r.json()['data']
-        hasnextpage = r['hasNextPage']
-        for i in r['list']:
-            if today == int(i['createDate'][0:10].replace('-', '')):  # 判断发布时间是否当天
-                bit_list.append(i['docTitle'])
-            else:
-                hasnextpage = False
-        data['pageNum'] = data['pageNum'] + 1
+        try:
+            r = requests.post(url, json=data, headers=headers, timeout=10)
+            if r.status_code != 200:
+                break
+            r = r.json()['data']
+            hasnextpage = r['hasNextPage']
+            for i in r['list']:
+                if today == int(i['createDate'][0:10].replace('-', '')):  # 判断发布时间是否当天
+                    bit_list.append(i['docTitle'])
+                else:
+                    hasnextpage = False
+            data['pageNum'] = data['pageNum'] + 1
+        except TimeoutError:
+            return []
     return bit_list
 
+#
+# k = sunshine_list()
+# print(k)
+# print(len(k))
 # def sunshine_html(get_bit_dict):
 #     html_1 = 'https://caigou.chinatelecom.com.cn/ctsc-portal'
 #     bit_type = {
