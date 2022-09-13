@@ -39,15 +39,6 @@ def ts_stocks():
     return all_stocks
 
 
-# s = ts_stocks()
-# print(s)
-def search_code(get_list, name):
-    search_stock = []
-    for i in get_list.keys():
-        if name in i:
-            # print(i + ' ' + s[i])
-            search_stock.append(get_list[i])
-    return search_stock
 
 
 def real_time_stock(get_name):
@@ -60,16 +51,19 @@ def real_time_stock(get_name):
 #    print(codes)
     if codes:                           #搜索成功
         data = ts.get_realtime_quotes(codes)
-        data = data.to_dict(orient='dict')
-        tempdata = {}
-        tempinfo = []
-        for k in range(min(len(data['name']), 10)): #整理成列表[字典]格式传回
-            for i in data.keys():
-                tempdata[i] = data[i][k]
-            tempinfo.append(tempdata.copy())
-        return tempinfo
+        if data is None:
+            return []
+        else:
+            data = data.to_dict(orient='dict')
+            tempdata = {}
+            tempinfo = []
+            for k in range(min(len(data['name']), 10)): #整理成列表[字典]格式传回
+                for i in data.keys():
+                    tempdata[i] = data[i][k]
+                tempinfo.append(tempdata.copy())
+            return tempinfo
     else:
         return []
 
 
-print(real_time_stock('广东'))
+#print(real_time_stock('则成'))
