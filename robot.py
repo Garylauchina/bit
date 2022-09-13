@@ -108,7 +108,7 @@ def echo(msg):
                                     '价格：' + i['price'] + '\n' + \
                                     '今开：' + i['open'] + '\n' + \
                                     '昨收：' + i['pre_close'] + '\n' + \
-                                    '成交：' + int(i['amount'] / 10000) + '\n')
+                                    '成交：' + str(int(i['amount'] / 10000)) + '\n')
             send_msg(wait_to_send, msg.source, access_token)
             return '发送完毕\n' + lg_menu
         else:
