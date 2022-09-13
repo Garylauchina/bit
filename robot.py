@@ -73,6 +73,7 @@ def echo(msg):
     print(msg.source)
     refresh_list(msg.content)
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
+    send_msg('', msg.source, access_token)
     if msg.content == '1':
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
@@ -98,18 +99,20 @@ def echo(msg):
             user_tag[2] = 0
             return '发送完毕\n' + lg_menu
     elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文
-        codes = search_code(all_stocks, msg.content)
-        if len(codes) == 0:
-            return '没有%s这个股票\n' % msg.content + lg_menu
+        realtime_list = real_time_stock(msg.content)  # 获取股票实时行情
+        wait_to_send = []
+        if realtime_list:
+            for i in realtime_list:
+                wait_to_send.append('名称：' + i['name'] + '\n' + \
+                                    '代码：' + i['code'] + '\n' + \
+                                    '价格：' + i['price'] + '\n' + \
+                                    '今开：' + i['open'] + '\n' + \
+                                    '昨收：' + i['pre_close'] + '\n' + \
+                                    '成交：' + int(i['amount'] / 10000) + '\n')
+            send_msg(wait_to_send, msg.source, access_token)
+            return '发送完毕\n' + lg_menu
         else:
-            stock_data = []
-            for j in range(min(10, len(codes))):
-                stock_data.append(get_stock(codes[j]))
-            send_msg(stock_data, msg.source, access_token)
-            if len(codes) <= 10:
-                return '发送完毕\n' + lg_menu
-            else:
-                return '太多了，输入准确点\n' + lg_menu
+            return '没有"%s"这支股票\n' % msg.content + lg_menu
     return lg_menu
 
 

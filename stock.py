@@ -1,9 +1,6 @@
-import requests
-import re
-import json
 import tushare as ts
 
-
+'''
 # 用网易平台api获取股票数据。
 def get_stock(stock_name):
     new_name = stock_name[-3:] + stock_name[:6]
@@ -23,6 +20,7 @@ def get_stock(stock_name):
         return result
     except:
         return
+'''
 
 
 # 用tushare平台获取股票数据
@@ -51,3 +49,27 @@ def search_code(get_list, name):
             search_stock.append(get_list[i])
     return search_stock
 
+
+def real_time_stock(get_name):
+    ts.set_token('c8b4deb22f79698808459d529f7fa3bae0522794dda732a5a9b8ed73')
+    stock_list = ts_stocks()
+    codes = []
+    for i in stock_list.keys():         #将传入的股票名称搜索到对应的代码
+        if get_name in i:
+            codes.append(stock_list[i][0:6])
+#    print(codes)
+    if codes:                           #搜索成功
+        data = ts.get_realtime_quotes(codes)
+        data = data.to_dict(orient='dict')
+        tempdata = {}
+        tempinfo = []
+        for k in range(min(len(data['name']), 10)): #整理成列表[字典]格式传回
+            for i in data.keys():
+                tempdata[i] = data[i][k]
+            tempinfo.append(tempdata.copy())
+        return tempinfo
+    else:
+        return []
+
+
+print(real_time_stock('广东'))
