@@ -73,7 +73,7 @@ def echo(msg):
     print(msg.source)
     refresh_list(msg.content)
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
-    send_msg('\n', msg.source, access_token)
+    send_msg('稍等。。。', msg.source, access_token)
     if msg.content == '1':
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
@@ -108,7 +108,7 @@ def echo(msg):
                                     '价格：' + i['price'] + '\n' + \
                                     '今开：' + i['open'] + '\n' + \
                                     '昨收：' + i['pre_close'] + '\n' + \
-                                    '成交：' + str(round(float(i['amount']) / 10000, 2) + '万\n'))
+                                    '成交：' + str(round(float(i['amount']) / 10000, 2)) + '万\n')
             send_msg(wait_to_send, msg.source, access_token)
             return '发送完毕\n' + lg_menu
         else:
