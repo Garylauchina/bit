@@ -30,9 +30,9 @@ user_status = {}
 for i in user_list:
     user_status[i] = [0, 0, 0, 0]  # 初始化用户状态，四个数值分别代表四个列表的发送断点
 print('总共%s名用户' % len(user_list))
-# 获取所有上市公司清单
-all_stocks = ts_stocks()  # 获取所有上市公司清单
-print('更新%s家上市公司信息' % len(all_stocks))
+# # 获取所有上市公司清单
+# all_stocks = ts_stocks()  # 获取所有上市公司清单
+# print('更新%s家上市公司信息' % len(all_stocks))
 
 
 def refresh_list(get_id):
@@ -73,7 +73,7 @@ def echo(msg):
     print(msg.source)
     refresh_list(msg.content)
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
-    send_msg('', msg.source, access_token)
+    send_msg('\n', msg.source, access_token)
     if msg.content == '1':
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
