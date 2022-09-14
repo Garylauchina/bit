@@ -127,7 +127,19 @@ def welcome(msg):
     refresh_list(3)
     user_list = all_user(access_token)
     user_status[msg.source] = [0, 0, 0, 0]
+    print(msg.source+'用户关注')
     return lg_menu
+
+
+@robot.unsubscribe
+def goodbye(msg):
+    global user_status
+    try:
+        user_status.pop(msg.source)
+    except:
+        pass
+    print(msg.source+'用户取关')
+    return
 
 
 robot.config['HOST'] = '0.0.0.0'
