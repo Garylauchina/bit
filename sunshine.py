@@ -18,13 +18,7 @@ def add_user(get_store, get_id):
 def all_user(get_token):
     get_id_url = '/user/get?access_token=%s&next_openid'
     a = requests.get(base_url + get_id_url % get_token).json()['data']['openid']
-    #    print('总共%s名用户' % a.json()['total'])
-    print(a)
-    #    a = a.json()['data']
-    #    for n in range(len(a)):
-    #        id_info = requests.get(base_url + id_info_url % (access_token, a[n]))
-    #        print(id_info.json())
-    return a
+    return a  # 返回[opid]列表
 
 
 def new_token():

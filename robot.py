@@ -72,9 +72,8 @@ def refresh_token():
 def echo(msg):
     global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, all_stocks, user_status
     refresh_token()
-    print(msg.source)
+    print(time.strftime('%Y-%m-%d %H:%M:%S')+'\''+msg.source+'\''+'\''+msg.content+'\'')
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
-    #    send_msg('稍等。。。', msg.source, access_token)
     if msg.content == '1':
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
