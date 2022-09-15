@@ -75,7 +75,7 @@ def echo(msg):
     print(time.strftime('%Y-%m-%d %H:%M:%S')+'\''+msg.source+'\''+'\''+msg.content+'\'')
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
-        refresh_list(1)
+        ct_list = sunshine_list()
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
             user_tag[0] += 10
@@ -84,7 +84,7 @@ def echo(msg):
             user_tag[0] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        refresh_list(2)
+        cm_list = cm_new_list()
         wait_to_send = send_msg(cm_list[user_tag[1]::], msg.source, access_token)
         if wait_to_send:
             user_tag[1] += 10
@@ -93,7 +93,7 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        refresh_list(3)
+        hot_film = film_list()
         wait_to_send = send_msg(hot_film[user_tag[2]::], msg.source, access_token)
         if wait_to_send:
             user_tag[2] += 10

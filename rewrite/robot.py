@@ -5,11 +5,15 @@
 目标4：初步掌握SQLite的用法
 目标5：掌握后台爬虫定时工作的方法
 """
+import werobot
+
+robot = werobot.WeRoBot(token='Dcbpes2098')
 
 
-def print_hi(name):
-    print(f'Hi, {name}')
+@robot.text
+def hello_world():
+    return 'Hello World!'
 
-
-if __name__ == '__main__':
-    print_hi('Python')
+robot.config['HOST'] = '0.0.0.0'
+robot.config['PORT'] = 80
+robot.run()
