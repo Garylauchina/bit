@@ -40,17 +40,17 @@ print('总共%s名用户' % len(user_list))
 def refresh_list(get_id):
     global ct_list, hot_film, ct_list_time, hot_film_time, cm_list_time, cm_list
     if get_id == '1':
-        if time.time() - ct_list_time > 0:
+        if time.time() - ct_list_time > 600:
             ct_list = sunshine_list()
             ct_list_time = time.time()
             print('电信招标信息已更新')
     elif get_id == '3':
-        if time.time() - hot_film_time > 0:
+        if time.time() - hot_film_time > 600:
             hot_film = film_list()
             hot_film_time = time.time()
             print('电影列表已更新')
     elif get_id == '2':
-        if time.time() - cm_list_time > 0:
+        if time.time() - cm_list_time > 600:
             cm_list = cm_new_list()
             cm_list_time = time.time()
             print('移动招标信息已更新')
