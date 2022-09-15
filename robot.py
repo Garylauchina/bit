@@ -40,17 +40,17 @@ print('总共%s名用户' % len(user_list))
 def refresh_list(get_id):
     global ct_list, hot_film, ct_list_time, hot_film_time, cm_list_time, cm_list
     if get_id == '1':
-        if time.time() - ct_list_time > 1800:  # 每三十分钟更新一次招标信息
+        if time.time() - ct_list_time > 0:
             ct_list = sunshine_list()
             ct_list_time = time.time()
             print('电信招标信息已更新')
     elif get_id == '3':
-        if time.time() - hot_film_time > 1800:  # 每三十分钟更新一次招标信息
+        if time.time() - hot_film_time > 0:
             hot_film = film_list()
             hot_film_time = time.time()
             print('电影列表已更新')
     elif get_id == '2':
-        if time.time() - cm_list_time > 1800:  # 每三十分钟更新一次招标信息
+        if time.time() - cm_list_time > 0:
             cm_list = cm_new_list()
             cm_list_time = time.time()
             print('移动招标信息已更新')
@@ -75,7 +75,7 @@ def echo(msg):
     print(time.strftime('%Y-%m-%d %H:%M:%S')+'\''+msg.source+'\''+'\''+msg.content+'\'')
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
-        ct_list = sunshine_list()
+        refresh_list(1)
         wait_to_send = send_msg(ct_list[user_tag[0]::], msg.source, access_token)
         if wait_to_send:
             user_tag[0] += 10
@@ -84,7 +84,7 @@ def echo(msg):
             user_tag[0] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '2':
-        cm_list = cm_new_list()
+        refresh_list(2)
         wait_to_send = send_msg(cm_list[user_tag[1]::], msg.source, access_token)
         if wait_to_send:
             user_tag[1] += 10
@@ -93,7 +93,7 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        hot_film = film_list()
+        refresh_list(3)
         wait_to_send = send_msg(hot_film[user_tag[2]::], msg.source, access_token)
         if wait_to_send:
             user_tag[2] += 10
