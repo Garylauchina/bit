@@ -8,6 +8,8 @@ def cm_new_list():
     requests.packages.urllib3.disable_warnings()
     url = 'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2'
     r = requests.get(url, verify=False)
+    if r.status_code != 200:
+        return []
     post_cookie = 'JSESSIONID=' + r.cookies.get_dict()['JSESSIONID']  # 获取网站cookie
     headers = {
         'Cookie': post_cookie,
@@ -55,3 +57,11 @@ def cm_new_list():
                 name = txt.get('title')
             bit_list.append(name)
     return bit_list
+
+
+def main():
+    print(cm_new_list())
+
+
+if __name__ == '__main__':
+    main()
