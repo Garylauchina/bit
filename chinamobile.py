@@ -8,7 +8,7 @@ def cm_new_list():
     requests.packages.urllib3.disable_warnings()
     url = 'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2'
     r = requests.get(url, verify=False)
-    if r.status_code != 200:
+    if r.status_code != 200 and r.status_code != 403:
         return []
     post_cookie = 'JSESSIONID=' + r.cookies.get_dict()['JSESSIONID']  # 获取网站cookie
     headers = {
