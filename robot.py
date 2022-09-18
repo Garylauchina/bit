@@ -74,11 +74,12 @@ def refresh_token():
 def git_update(msg):
     send_msg(['robot正在更新。。。'], msg.source, access_token)
     a = os.popen('git pull')
-    return a.read() + '\n' + '更新成功'
+    return a.read()
 
 
 @robot.filter('restart')
-def robot_restart():
+def robot_restart(msg):
+    send_msg(['robot正在重启。。。'], msg.source, access_token)
     a = os.popen('supervisorctl restart wechat_robot')
     return a.read() + '\n' + 'robot重启成功'
 
