@@ -74,7 +74,7 @@ def refresh_token():
 def git_update(msg):
     send_msg(['robot正在更新。。。'], msg.source, access_token)
     a = os.popen('git pull')
-    return
+    return a.read() + '\n' + '更新成功'
 
 
 @robot.filter('restart')
