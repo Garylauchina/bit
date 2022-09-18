@@ -3,7 +3,7 @@ import os
 from ddys import *
 import werobot
 
-from joke import get_joke
+from joke import get_joke, kuki_chat
 from sunshine import *
 from stock import *
 from chinamobile import *
@@ -134,6 +134,8 @@ def echo(msg):
             return '发送完毕\n' + lg_menu
         else:
             return '查不到"%s"股票信息\n' % msg.content + lg_menu
+    else:
+        return kuki_chat(msg)
     return lg_menu
 
 
