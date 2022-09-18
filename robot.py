@@ -89,7 +89,7 @@ def robot_restart(msg):
 def echo(msg):
     global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, user_status
     refresh_token()
-    send_msg(['正在查询，请稍等。。。'], msg.source, access_token)
+    send_msg(['。。。'], msg.source, access_token)
     print(time.strftime('%Y-%m-%d %H:%M:%S') + '\'' + msg.source + '\'' + '\'' + msg.content + '\'')
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
