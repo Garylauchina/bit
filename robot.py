@@ -4,7 +4,6 @@ from ddys import *
 import werobot
 from sunshine import *
 from stock import *
-import time
 from chinamobile import *
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -32,11 +31,6 @@ user_status = {}
 for i in user_list:
     user_status[i] = [0, 0, 0, 0]  # 初始化用户状态，四个数值分别代表四个列表的发送断点
 print('总共%s名用户' % len(user_list))
-
-
-# # 获取所有上市公司清单
-# all_stocks = ts_stocks()  # 获取所有上市公司清单
-# print('更新%s家上市公司信息' % len(all_stocks))
 
 
 def refresh_list(get_id):
