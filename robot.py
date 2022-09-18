@@ -2,6 +2,8 @@ import os
 
 from ddys import *
 import werobot
+
+from joke import get_joke
 from sunshine import *
 from stock import *
 from chinamobile import *
@@ -62,6 +64,11 @@ def refresh_token():
     else:
         print('token未过期，有效时间%s秒' % (7200 - (int(time.time()) - token_time)))
     return
+
+
+@robot.filter('笑话')
+def joke():
+    return get_joke()
 
 
 @robot.filter('update')
