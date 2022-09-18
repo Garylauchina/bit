@@ -9,12 +9,12 @@ from chinamobile import *
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
 print('启动时间：' + now)
-print("版本1.4 加入广西移动招标信息")
+print("版本1.5 自我更新并重启")
 robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
-lg_menu = '请输入：\n1-广西电信招标\n2-广西移动招标\n3-热门影视\n或者股票中文名，比如"石油"'
+lg_menu = '请输入：\n1-广西电信招标\n2-广西移动招标'
 # 更新电信招标信息
 ct_list = sunshine_list()  # 这是一个列表，里面的元素是列表,存储了当天的招标信息，需定时更新
 ct_list_time = time.time()  # 电信招标信息更新的时间
@@ -72,8 +72,13 @@ def refresh_token():
 
 @robot.filter('update')
 def git_update():
-    a = os.popen('ls')
+    a = os.popen('git pull')
     return a.read() + '\n' + '更新完成'
+
+@robot.filter('restart')
+def robot_restart():
+    a = os.popen('supervisorctl restart wechat_robot')
+    return a.read() + '\n' + 'robot重启成功'
 
 
 @robot.handler
