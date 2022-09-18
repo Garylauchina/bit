@@ -46,7 +46,7 @@ def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最
 def sunshine_list():
     # 中国电信阳光采购网
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
-    bit_list = []
+    bit_list = ['广西电信今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())]
     today = int(time.strftime('%Y%m%d', time.localtime()))
     hasnextpage = True
     headers = {
@@ -96,17 +96,14 @@ def sunshine_list():
             return []
     return bit_list
 
-#
-# k = sunshine_list()
-# print(k)
-# print(len(k))
-# def sunshine_html(get_bit_dict):
-#     html_1 = 'https://caigou.chinatelecom.com.cn/ctsc-portal'
-#     bit_type = {
-#         '采购结果公示': '/Nopublicity/jieguoDetail/412290',
-#         '比选公告': '/notLoglPublicAnnouncement/detail/5545213?id=5545213&user_collection',
-#         '单一来源采购公告': '',
-#         '询价公告': '',
-#         '招标公告': '',
-#     }
-#     return
+
+def make_img(get_list):
+    return
+
+
+def main():
+    make_img(sunshine_list())
+
+
+if __name__ == '__main__':
+    main()

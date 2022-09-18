@@ -1,4 +1,6 @@
 import re
+import time
+
 import requests
 from bs4 import BeautifulSoup
 
@@ -44,7 +46,7 @@ def cm_new_list():
 
     r = requests.post(url, data=data, headers=headers, verify=False)
     # print(r)
-    bit_list = []
+    bit_list = ['广西移动今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())]
     soup = BeautifulSoup(r.text, 'lxml')
     tag_td = soup.find_all('td')
     tag_td = tag_td[5:-9:]

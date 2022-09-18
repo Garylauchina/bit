@@ -1,3 +1,5 @@
+import os
+
 from ddys import *
 import werobot
 from sunshine import *
@@ -68,11 +70,17 @@ def refresh_token():
     return
 
 
+@robot.filter('update')
+def git_update():
+    a = os.popen('ls')
+    return a.read() + '\n' + '更新完成'
+
+
 @robot.handler
 def echo(msg):
     global ct_list, ct_list_time, hot_film, hot_film_time, cm_list, cm_list_time, all_stocks, user_status
     refresh_token()
-    print(time.strftime('%Y-%m-%d %H:%M:%S')+'\''+msg.source+'\''+'\''+msg.content+'\'')
+    print(time.strftime('%Y-%m-%d %H:%M:%S') + '\'' + msg.source + '\'' + '\'' + msg.content + '\'')
     user_tag = user_status[msg.source]  # 获取用户的状态码列表
     if msg.content == '1':
         ct_list = sunshine_list()
@@ -128,7 +136,7 @@ def welcome(msg):
     refresh_list(3)
     user_list = all_user(access_token)
     user_status[msg.source] = [0, 0, 0, 0]
-    print(msg.source+'用户关注')
+    print(msg.source + '用户关注')
     return lg_menu
 
 
@@ -139,7 +147,7 @@ def goodbye(msg):
         user_status.pop(msg.source)
     except:
         pass
-    print(msg.source+'用户取关')
+    print(msg.source + '用户取关')
     return
 
 

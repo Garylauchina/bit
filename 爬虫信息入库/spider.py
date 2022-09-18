@@ -8,7 +8,7 @@ class Spider:
         self.name = name
         print('构建%s列表' % name)
 
-    def all_list(self):
+    def all_list(self, page_num):
         if self.name == 'ct':
             query_url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
             headers = {
@@ -27,13 +27,14 @@ class Spider:
                 'Sec-Fetch-Dest': 'empty',
                 'Sec-Fetch-Mode': 'cors',
                 'Sec-Fetch-Site': 'same-origin',
-                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,likeGecko)Chrome/105.0.0.0Safari/537.36',
+                'User-Agent': 'Mozilla/5.0(Macintosh;IntelMacOSX10_15_7)AppleWebKit/537.36(KHTML,'
+                              'likeGecko)Chrome/105.0.0.0Safari/537.36',
                 'sec-ch-ua': '"GoogleChrome";v="105","Not)A;Brand";v="8","Chromium";v="105"',
                 'sec-ch-ua-mobile': '?0',
                 'sec-ch-ua-platform': '"macOS"',
             }
             data = {
-                'pageNum': 1,
+                'pageNum': page_num,
                 'pageSize': 10,
                 'provinceCode': "10",
                 'queryEndTime': "",
@@ -44,13 +45,14 @@ class Spider:
             r = requests.post(query_url, json=data, headers=headers)
             if r.status_code != 200:
                 return [r.status_code]
-            r = r.json()
+            r = r.json()['data']['list']
             return r
         elif self.name == 'cm':
             requests.packages.urllib3.disable_warnings()
             url = 'https://b2b.10086.cn/b2b/main/listVendorNotice.html?noticeType=2'
             r = requests.get(url, verify=False)
-            print(r.status_code)
+            if r.status_code != 200 and r.status_code != 403:
+                return []
             post_cookie = 'JSESSIONID=' + r.cookies.get_dict()['JSESSIONID']  # 获取网站cookie
             headers = {
                 'Cookie': post_cookie,
@@ -64,10 +66,10 @@ class Spider:
             data1 = re.findall(pattern1, r.text)[0].replace('\'', '')
             data2 = re.findall(pattern2, r.text)[0].replace('\'', '')
             post_tag = data1 + data2
-            print(post_tag)                                        #获得完整_qt参数
+            # print(post_tag)                                        #获得完整_qt参数
             url = 'https://b2b.10086.cn/b2b/main/listVendorNoticeResult.html?'
             data = {
-                'page.currentPage': 1,
+                'page.currentPage': page_num,
                 'page.perPageSize': 20,
                 'noticeBean.sourceCH': '广西',
                 'noticeBean.source': 'GX',
@@ -87,8 +89,8 @@ class Spider:
             # print(r)
             bit_list = []
             soup = BeautifulSoup(r.text, 'lxml')
-            tag_td = soup.find_all('td')
-            tag_td = tag_td[5:-9:]
+            tag_td = soup.find_all('td')  # 过滤出所有的td标签
+            tag_td = tag_td[5:-9:]  # 去除最后8个td标签
             for i in tag_td:
                 txt = i.find('a')
                 if txt:
@@ -102,9 +104,9 @@ class Spider:
 
 def main():
     spider1 = Spider('ct')
-    print(spider1.all_list())
+    print(spider1.all_list(20))
     spider2 = Spider('cm')
-    print(spider2.all_list())
+    print(spider2.all_list(20))
 
 
 if __name__ == '__main__':
