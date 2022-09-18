@@ -11,4 +11,7 @@ def get_joke():
 
 if __name__ == '__main__':
     joke = get_joke()
-    print(joke['content'])
+    print(type(joke))
+    joke = joke.replace('提示：按分类看笑话请发送“笑话分类”', '')
+    joke = joke.replace('{br}', '\n')
+    print(joke)
