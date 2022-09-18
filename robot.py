@@ -135,8 +135,8 @@ def echo(msg):
         else:
             return '查不到"%s"股票信息\n' % msg.content + lg_menu
     else:
-        return kuki_chat(msg)
-    return lg_menu
+        return kuki_chat(msg.content)
+    # return lg_menu
 
 
 @robot.subscribe
