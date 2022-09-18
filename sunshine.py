@@ -46,7 +46,7 @@ def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最
 def sunshine_list():
     # 中国电信阳光采购网
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
-    bit_list = ['广西电信今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())]
+    bit_list = ['广西电信今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())]
     today = int(time.strftime('%Y%m%d', time.localtime()))
     hasnextpage = True
     headers = {
