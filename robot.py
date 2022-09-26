@@ -115,7 +115,9 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
+        send_msg(['静心三秒。。。'], msg.source, access_token)
         obj = YiProgram()
+        time.sleep(3)
         send_msg(obj.main_logic_new(msg.source), msg.source, access_token)
         return '卜卦完毕\n' + lg_menu
     elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文

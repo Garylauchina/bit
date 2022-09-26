@@ -138,16 +138,16 @@ class YiProgram:
             support_indicate = book[support_hexagram_dict_key]["indicate"][0]
         return turn_symbol_desc, main_indicate, support_indicate
 
-    def main_logic_new(self,str):
-        #user_wish = input("请输入你所求之事:")
-        #user_pray = input(f"请输入你的祈祷：")
+    def main_logic_new(self, str):
+        # user_wish = input("请输入你所求之事:")
+        # user_pray = input(f"请输入你的祈祷：")
         output = []
         today = datetime.datetime.now().__format__("%Y%m%d")
         time_seed_str = str + today
         # 设置随机数种子，确保当天同样的输出得到的结果是一样的
         self._set_random_seed(time_seed_str)
         # print("\n稍等，正在计算卦象...")
-        output.append("\n稍等，正在计算卦象...")
+        output.append("稍等，正在计算卦象")
         # 生成本卦
         origin_hexagram = self._gen_origin_hexagram()
         # 计算变卦
@@ -159,18 +159,21 @@ class YiProgram:
         # print(
         #     f"本卦：{origin_hexagram}--{book[origin_hexagram_dict_key]['name']}--{book[origin_hexagram_dict_key]['come_from']}\n"
         #     f"变卦：{support_hexagram}--{book[support_hexagram_dict_key]['name']}--{book[support_hexagram_dict_key]['come_from']}")
-        output.append(f"本卦：{origin_hexagram}--{book[origin_hexagram_dict_key]['name']}--{book[origin_hexagram_dict_key]['come_from']}\n")
-        output.append(f"变卦：{support_hexagram}--{book[support_hexagram_dict_key]['name']}--{book[support_hexagram_dict_key]['come_from']}")
+        output.append(
+            f"本卦：{origin_hexagram}--{book[origin_hexagram_dict_key]['name']}--{book[origin_hexagram_dict_key]['come_from']}")
+        output.append(
+            f"变卦：{support_hexagram}--{book[support_hexagram_dict_key]['name']}--{book[support_hexagram_dict_key]['come_from']}")
         # print("\n稍等，正在解卦...")
         # 解卦
         turn_symbol_desc, main_indicate, support_indicate = self._parser_hexagram(origin_hexagram, support_hexagram)
         # print(f"说明：{turn_symbol_desc}\n"
         #       f"主预言：{main_indicate}\n"
         #       f"辅预言：{support_indicate}")
-        output.append(f"说明：{turn_symbol_desc}\n")
-        output.append(f"主预言：{main_indicate}\n")
+        output.append(f"说明：{turn_symbol_desc}")
+        output.append(f"主预言：{main_indicate}")
         output.append(f"辅预言：{support_indicate}")
         return output
+
 
 if __name__ == "__main__":
     obj = YiProgram()
