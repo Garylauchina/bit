@@ -4,6 +4,7 @@ from ddys import *
 import werobot
 
 from joke import get_joke, kuki_chat
+from suangua import YiProgram
 from sunshine import *
 from stock import *
 from chinamobile import *
@@ -15,7 +16,10 @@ robot = werobot.WeRoBot(token='Dcbpes2098')
 access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
-lg_menu = '请输入：\n1-广西电信招标\n2-广西移动招标'
+lg_menu = '请输入：\n' \
+          '1-广西电信招标\n' \
+          '2-广西移动招标\n' \
+          '3-每日一卦'
 # 更新电信招标信息
 ct_list = sunshine_list()  # 这是一个列表，里面的元素是列表,存储了当天的招标信息，需定时更新
 ct_list_time = time.time()  # 电信招标信息更新的时间
@@ -111,14 +115,9 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content == '3':
-        hot_film = film_list()
-        wait_to_send = send_msg(hot_film[user_tag[2]::], msg.source, access_token)
-        if wait_to_send:
-            user_tag[2] += 10
-            return "还有%s条" % (len(hot_film) - user_tag[2])
-        else:
-            user_tag[2] = 0
-            return '发送完毕\n' + lg_menu
+        obj = YiProgram()
+        send_msg(obj.main_logic_new(msg.source), msg.source, access_token)
+        return '卜卦完毕\n' + lg_menu
     elif '\u4e00' <= msg.content <= '\u9fa5':  # 判断输入的是中文
         realtime_list = real_time_stock(msg.content)  # 获取股票实时行情
         wait_to_send = []
@@ -135,7 +134,7 @@ def echo(msg):
         else:
             return '查不到"%s"股票信息\n' % msg.content + lg_menu
     else:
-        return kuki_chat(msg.content)
+        return lg_menu
 
 
 @robot.subscribe
