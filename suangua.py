@@ -138,12 +138,12 @@ class YiProgram:
             support_indicate = book[support_hexagram_dict_key]["indicate"][0]
         return turn_symbol_desc, main_indicate, support_indicate
 
-    def main_logic_new(self, str):
+    def main_logic_new(self, get_str):
         # user_wish = input("请输入你所求之事:")
         # user_pray = input(f"请输入你的祈祷：")
         output = []
         today = datetime.datetime.now().__format__("%Y%m%d")
-        time_seed_str = str + today
+        time_seed_str = get_str + today
         # 设置随机数种子，确保当天同样的输出得到的结果是一样的
         self._set_random_seed(time_seed_str)
         # print("\n稍等，正在计算卦象...")
