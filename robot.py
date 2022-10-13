@@ -126,7 +126,7 @@ def echo(msg):
     elif msg.content.isalpha():  # 判断输入的是字母或者中文
         realtime_list = real_time_stock(msg.content)  # 获取股票实时行情
         if len(realtime_list) > 10:
-            return '包含 %s 的股票太多，请重新输入' % msg.content + lg_menu
+            return '包含 %s 的股票太多，请重新输入\n' % msg.content + lg_menu
         wait_to_send = []
         if realtime_list:
             for i in realtime_list:
