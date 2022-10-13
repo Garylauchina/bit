@@ -115,7 +115,7 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content[0] == '3':
-        wish = msg.content[1:]
+        wish = msg.content[1:] + time.strftime('%Y%m%d',time.localtime())
         if wish == '':
             return "请在3后面输入所求之事\n比如'3中标'"
         send_msg(['静心三秒。。。'], msg.source, access_token)
@@ -125,6 +125,8 @@ def echo(msg):
         return '卜卦完毕\n' + lg_menu
     elif msg.content.isalpha():  # 判断输入的是字母或者中文
         realtime_list = real_time_stock(msg.content)  # 获取股票实时行情
+        if len(realtime_list) > 10:
+            return '包含 %s 的股票太多，请重新输入' % msg.content + lg_menu
         wait_to_send = []
         if realtime_list:
             for i in realtime_list:
