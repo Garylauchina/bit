@@ -115,13 +115,13 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content[0] == '3':
-        wish = msg.content[1:] + msg.source
+        wish = msg.content[1:]
         if wish == '':
             return "请在3后面输入所求之事\n比如'3中标'"
         send_msg(['静心三秒。。。'], msg.source, access_token)
         obj = YiProgram()
         time.sleep(1)
-        send_msg(obj.main_logic_new(wish), msg.source, access_token)
+        send_msg(obj.main_logic_new(wish + msg.source), msg.source, access_token)
         return '卜卦完毕\n' + lg_menu
     elif msg.content.isalpha():  # 判断输入的是字母或者中文
         realtime_list = real_time_stock(msg.content)  # 获取股票实时行情
