@@ -115,7 +115,7 @@ def echo(msg):
             user_tag[1] = 0
             return '发送完毕\n' + lg_menu
     elif msg.content[0] == '3':
-        wish = msg.content[1:] + time.strftime('%Y%m%d',time.localtime())
+        wish = msg.content[1:] + msg.source
         if wish == '':
             return "请在3后面输入所求之事\n比如'3中标'"
         send_msg(['静心三秒。。。'], msg.source, access_token)
