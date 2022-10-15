@@ -90,7 +90,7 @@ def echo(msg):
     if msg.content == '1':
         wait_to_send = bit_list.ct_list()
         if not wait_to_send:
-            return "广西电信今日无新公告" + lg_menu
+            return "广西电信今日无新公告\n" + lg_menu
         wait_to_send = send_msg(wait_to_send[user_status[msg.source][0]::], msg.source, access_token)
         if wait_to_send:
             user_status[msg.source][0] += 10
