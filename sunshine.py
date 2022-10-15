@@ -15,7 +15,7 @@ def add_user(get_store, get_id):
     return get_store
 
 
-def all_user(get_token) -> list[str]:
+def all_user(get_token):
     get_id_url = '/user/get?access_token=%s&next_openid'
     a = requests.get(base_url + get_id_url % get_token).json()['data']['openid']
     return a  # 返回[openid]列表
