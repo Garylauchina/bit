@@ -76,9 +76,8 @@ def goodbye(msg):
     try:
         user_status.pop(msg.source)
         print(msg.source + '用户取关')
-        return
     except:
-        return
+        pass
 
 
 @robot.filter('笑话')
@@ -100,7 +99,7 @@ def robot_restart(msg):
     return a.read() + '\n' + 'robot重启成功'
 
 
-@robot.handler
+@robot.text
 def echo(msg):
     refresh_token()
     if msg.content == '1':
