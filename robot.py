@@ -76,8 +76,9 @@ def goodbye(msg):
     try:
         user_status.pop(msg.source)
         print(msg.source + '用户取关')
+        return
     except:
-        pass
+        return
 
 
 @robot.filter('笑话')
