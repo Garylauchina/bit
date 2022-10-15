@@ -33,7 +33,7 @@ def cm_new_list():
         'noticeBean.sourceCH': '广西',
         'noticeBean.source': 'GX',
         'noticeBean.title': '',
-        'noticeBean.startDate': '',
+        'noticeBean.startDate': time.strftime('%Y-%m-%d', time.localtime()),
         'noticeBean.endDate': '',
         '_qt': post_tag,
     }
@@ -46,7 +46,7 @@ def cm_new_list():
 
     r = requests.post(url, data=data, headers=headers, verify=False)
     # print(r)
-    bit_list = ['广西移动今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S', time.localtime())]
+    bit_list = []
     soup = BeautifulSoup(r.text, 'lxml')
     tag_td = soup.find_all('td')
     tag_td = tag_td[5:-9:]

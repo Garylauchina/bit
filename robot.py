@@ -1,4 +1,5 @@
 import os
+import time
 
 from ddys import *
 import werobot
@@ -8,6 +9,31 @@ from suangua import YiProgram
 from sunshine import *
 from stock import *
 from chinamobile import *
+
+"""
+class BitList:
+    def __init__(self):
+        self._ct_list = sunshine_list()
+        self._ct_update = time.time()
+        self._cm_list = cm_new_list()
+        self._cm_update = time.time()
+
+    def ct_list(self):
+        return self._ct_list if self._ct_update - time.time() < 300 else self.refresh(1)
+
+    def cm_list(self):
+        return self._cm_list if self._cm_update - time.time() < 300 else self.refresh(2)
+
+    def refresh(self, num):
+        if num == 1:
+            self._ct_update = time.time()
+            self._ct_list = sunshine_list()
+            return self._ct_list
+        else:
+            self._cm_update = time.time()
+            self._cm_list = cm_new_list()
+            return self._cm_list
+"""
 
 now = time.strftime('%Y-%m-%d %H:%M:%S')
 print('启动时间：' + now)
@@ -107,6 +133,8 @@ def echo(msg):
             return '发送完毕\n' + lg_menu
     elif msg.content == '2':
         cm_list = cm_new_list()
+        if not cm_list:
+            return "广西移动今日无新公告\n" + lg_menu
         wait_to_send = send_msg(cm_list[user_tag[1]::], msg.source, access_token)
         if wait_to_send:
             user_tag[1] += 10
