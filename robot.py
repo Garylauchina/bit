@@ -63,6 +63,23 @@ def refresh_token():
     return
 
 
+@robot.subscribe
+def welcome(msg):
+    refresh_token()
+    user_status.update({msg.source: [0, 0]})
+    print(msg.source + '用户关注')
+    return "欢迎使用\n" + lg_menu
+
+
+@robot.unsubscribe
+def goodbye(msg):
+    try:
+        user_status.pop(msg.source)
+        print(msg.source + '用户取关')
+    except:
+        pass
+
+
 @robot.filter('笑话')
 def joke():
     return get_joke()
@@ -85,8 +102,6 @@ def robot_restart(msg):
 @robot.handler
 def echo(msg):
     refresh_token()
-    # send_msg(['。。。'], msg.source, access_token)
-    print(time.strftime('%Y-%m-%d %H:%M:%S') + '\'' + msg.source + '\'' + '\'' + msg.content + '\'')
     if msg.content == '1':
         wait_to_send = bit_list.ct_list()
         if not wait_to_send:
@@ -137,23 +152,6 @@ def echo(msg):
             return '查不到"%s"股票信息\n' % msg.content + lg_menu
     else:
         return lg_menu
-
-
-@robot.subscribe
-def welcome(msg):
-    refresh_token()
-    user_status.update({msg.source: [0, 0]})
-    print(msg.source + '用户关注')
-    return "欢迎使用\n" + lg_menu
-
-
-@robot.unsubscribe
-def goodbye(msg):
-    try:
-        user_status.pop(msg.source)
-        print(msg.source + '用户取关')
-    except:
-        pass
 
 
 robot.config['HOST'] = '0.0.0.0'
