@@ -76,7 +76,7 @@ def goodbye(msg):
     try:
         user_status.pop(msg.source)
         print(msg.source + '用户取关')
-    except:
+    except KeyError:
         pass
 
 
@@ -140,11 +140,11 @@ def echo(msg):
         wait_to_send = []
         if realtime_list:
             for i in realtime_list:
-                wait_to_send.append('名称：' + i['name'] + '\n' + \
-                                    '代码：' + i['code'] + '\n' + \
-                                    '价格：' + i['price'] + '\n' + \
-                                    '今开：' + i['open'] + '\n' + \
-                                    '昨收：' + i['pre_close'] + '\n' + \
+                wait_to_send.append('名称：' + i['name'] + '\n' +
+                                    '代码：' + i['code'] + '\n' +
+                                    '价格：' + i['price'] + '\n' +
+                                    '今开：' + i['open'] + '\n' +
+                                    '昨收：' + i['pre_close'] + '\n' +
                                     '成交：' + str(round(float(i['amount']) / 10000, 2)) + '万\n')
             send_msg(wait_to_send, msg.source, access_token)
             return '发送完毕\n' + lg_menu
