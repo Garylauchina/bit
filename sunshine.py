@@ -15,10 +15,10 @@ def add_user(get_store, get_id):
     return get_store
 
 
-def all_user(get_token):
+def all_user(get_token) -> list[str]:
     get_id_url = '/user/get?access_token=%s&next_openid'
     a = requests.get(base_url + get_id_url % get_token).json()['data']['openid']
-    return a  # 返回[opid]列表
+    return a  # 返回[openid]列表
 
 
 def new_token():
@@ -46,7 +46,7 @@ def send_msg(message_list, get_user, get_token):  # 发送列表中的元素,最
 def sunshine_list():
     # 中国电信阳光采购网
     url = 'https://caigou.chinatelecom.com.cn/portal/base/announcementJoin/queryList'
-    bit_list = ['广西电信今日招标信息', time.strftime('%Y-%m-%d %H:%M:%S',time.localtime())]
+    bit_list = []
     today = int(time.strftime('%Y%m%d', time.localtime()))
     hasnextpage = True
     headers = {
