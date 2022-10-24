@@ -2,6 +2,7 @@ import os
 
 import werobot
 
+from biyibijia import smzdm
 from joke import get_joke
 from suangua import YiProgram
 from sunshine import *
@@ -44,9 +45,8 @@ access_token = new_token()
 token_time = int(time.time())
 user_list = all_user(access_token)
 lg_menu = '请输入：\n' \
-          '1-广西电信招标\n' \
-          '2-广西移动招标\n' \
-          '3-每日一卦'
+          '1-想买啥？\n' \
+          '2-每日一卦'
 
 user_status = {openid: [0, 0] for openid in user_list}
 print('总共%s名用户' % len(user_list))
@@ -102,32 +102,19 @@ def robot_restart(msg):
 @robot.text
 def echo(msg):
     refresh_token()
-    if msg.content == '1':
-        wait_to_send = bit_list.ct_list()
+    if msg.content[0] == '1':
+        item = msg.content[1:]
+        if item == '':
+            return "请在1后面输入商品名称\n比如'1电视机'"
+        wait_to_send = smzdm(item)
         if not wait_to_send:
-            return "广西电信今日无新公告\n" + lg_menu
-        wait_to_send = send_msg(wait_to_send[user_status[msg.source][0]::], msg.source, access_token)
-        if wait_to_send:
-            user_status[msg.source][0] += 10
-            return "还有%s条" % (len(wait_to_send))
-        else:
-            user_status[msg.source][0] = 0
-            return '发送完毕\n' + lg_menu
-    elif msg.content == '2':
-        wait_to_send = bit_list.cm_list()
-        if not wait_to_send:
-            return "广西移动今日无新公告\n" + lg_menu
-        wait_to_send = send_msg(wait_to_send[user_status[msg.source][1]::], msg.source, access_token)
-        if wait_to_send:
-            user_status[msg.source][1] += 10
-            return "还有%s条" % (len(wait_to_send))
-        else:
-            user_status[msg.source][1] = 0
-            return '发送完毕\n' + lg_menu
-    elif msg.content[0] == '3':
+            return "没有找到优质推荐\n" + lg_menu
+        send_msg(wait_to_send, msg.source, access_token)
+        return lg_menu
+    elif msg.content[0] == '2':
         wish = msg.content[1:]
         if wish == '':
-            return "请在3后面输入所求之事\n比如'3中标'"
+            return "请在2后面输入所求之事\n比如'2中标'"
         send_msg(['静心三秒。。。'], msg.source, access_token)
         obj = YiProgram()
         time.sleep(1)
